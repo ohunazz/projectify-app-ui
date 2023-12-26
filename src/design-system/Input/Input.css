@@ -1,0 +1,79 @@
+.input {
+    outline: none !important;
+    height: 3.6rem;
+    border: 0.15rem solid var(--jaguar-200);
+    padding: 0 var(--space-16);
+    font-family: inherit;
+    font-size: var(--font-size-16);
+    color: var(--jaguar-900);
+    resize: none;
+    width: 100%;
+    display: block;
+}
+
+input::placeholder,
+:-ms-input-placeholder {
+    color: var(--jaguar-400);
+}
+
+.input-small {
+    height: 3.6rem;
+}
+
+.input-medium {
+    height: 4rem;
+}
+
+.input-large {
+    height: 4.8rem;
+}
+
+.input-rounded {
+    border-radius: var(--border-radius-8);
+}
+
+.input-circle {
+    border-radius: var(--border-radius-20);
+}
+
+.input-lg.input-circle {
+    border-radius: var(--border-radius-24);
+}
+
+.input:hover:not(.input-error, :disabled) {
+    border: 0.15rem solid var(--primary-500);
+}
+
+.input:focus:not(.input-error) {
+    border: 0.15rem solid var(--primary-500);
+}
+
+.input-error {
+    border: 0.15rem solid var(--red-orange-500);
+}
+
+.input:disabled {
+    border-color: var(--jaguar-100);
+    background-color: var(--white);
+}
+
+.input:disabled::placeholder {
+    color: var(--jaguar-300);
+}
+
+.input-wrapper label {
+    display: block;
+    margin-bottom: var(--space-2);
+}
+
+.input.input-textarea.input-small {
+    height: 7.2rem;
+}
+
+.input.input-textarea.input-medium {
+    height: 12rem;
+}
+
+.input.input-textarea.input-large {
+    height: 13.4rem;
+}
