@@ -5,6 +5,7 @@ import {
     weightClassNames,
     alignClassNames
 } from "./classnames";
+import { trimWhiteSpaces } from "../utils";
 
 type TypographyVariant =
     | "displayLG"
@@ -22,9 +23,9 @@ type TypographyAlign = "center" | "left" | "right" | "justify" | "inherit";
 
 type TypographyProps = {
     variant: TypographyVariant;
-    weight: TypographyWeight;
-    align: TypographyAlign;
-    className: string;
+    weight?: TypographyWeight;
+    align?: TypographyAlign;
+    className?: string;
     children: React.ReactNode;
 };
 
@@ -36,13 +37,16 @@ export const Typography: React.FC<TypographyProps> = ({
     children
 }) => {
     const variantClassName = variantClassNames[variant];
-    const weightClassName = weightClassNames[weight] || "";
-    const alignClassName = alignClassNames[align] || "";
+    const weightClassName =
+        weight !== undefined ? weightClassNames[weight] : "";
 
-    const finalClassName =
+    const alignClassName = align !== undefined ? alignClassNames[align] : "";
+
+    const finalClassName = trimWhiteSpaces(
         `${variantClassName} ${weightClassName} ${alignClassName} ${
             className || ""
-        }`.trim();
+        }`
+    );
 
     if (
         variant === "displayLG" ||
