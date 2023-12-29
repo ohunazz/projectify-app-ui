@@ -15,7 +15,13 @@ type TypographyVariant =
     | "h3"
     | "h4"
     | "h5"
-    | "h6";
+    | "h6"
+    | "paragraphLG"
+    | "paragraphMD"
+    | "paragraphSM"
+    | "subtitleLG"
+    | "subtitleMD"
+    | "subtitleSM";
 
 type TypographyWeight = "normal" | "medium" | "semibold" | "bold";
 
