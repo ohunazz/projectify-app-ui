@@ -2,12 +2,13 @@ import { useState, useId } from "react";
 import { Button, Typography, Input, Label, Modal } from "./design-system";
 
 const App = () => {
-    const [value, setValue] = useState<string>("");
-    const [text, setText] = useState<string>("");
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     return (
         <div style={{ padding: "100px" }}>
-            <Modal show={true}>
+            <Button onClick={() => setShowModal(true)}>Open Modal</Button>
+            <Modal show={showModal} position="center">
+                <span onClick={() => setShowModal(false)}>X</span>
                 <Typography variant="h3">Hello</Typography>
                 <Input
                     placeholder="Email"
@@ -17,7 +18,11 @@ const App = () => {
                     shape="rounded"
                     size="lg"
                 />
-                <Button color="primary" shape="rounded">
+                <Button
+                    color="primary"
+                    shape="rounded"
+                    onClick={() => setShowModal(false)}
+                >
                     Submit
                 </Button>
             </Modal>
