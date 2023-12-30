@@ -129,17 +129,6 @@
     line-height: var(--line-height-18);
 }
 
-.button-lowercase {
-    font-size: var(--font-size-16);
-    line-height: var(--line-height-20);
-}
-
-.button-uppercase {
-    font-size: var(--font-size-14);
-    line-height: var(--line-height-20);
-    letter-spacing: 5%;
-}
-
 .overline {
     font-size: var(--font-size-10);
     line-height: var(--line-height-16);

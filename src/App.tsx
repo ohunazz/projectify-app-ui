@@ -1,24 +1,33 @@
-import React from "react";
-import { useEffect } from "react";
-import { admin } from "./api";
-import { Typography, TypographyProps } from "./design-system";
+import { useState, useId } from "react";
+import { Button, Typography, Input, Label, Modal } from "./design-system";
 
 const App = () => {
-    useEffect(() => {
-        admin
-            .forgotPassword("ramazoncode@gmail.com")
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+    const [showModal, setShowModal] = useState<boolean>(false);
+
     return (
-        <>
-            <Typography variant={TypographyProps.variant.h1}>Hello</Typography>;
-        </>
+        <div style={{ padding: "100px" }}>
+            <Button onClick={() => setShowModal(true)}>Open Modal</Button>
+            <Modal show={showModal} position="center">
+                <span onClick={() => setShowModal(false)}>X</span>
+                <Typography variant="h3">Hello</Typography>
+                <Input
+                    placeholder="Email"
+                    type="email"
+                    value=""
+                    onChange={(char) => console.log(char)}
+                    shape="rounded"
+                    size="lg"
+                />
+                <Button
+                    color="primary"
+                    shape="rounded"
+                    onClick={() => setShowModal(false)}
+                >
+                    Submit
+                </Button>
+            </Modal>
+        </div>
     );
 };
 
-export default App;
+export { App };
