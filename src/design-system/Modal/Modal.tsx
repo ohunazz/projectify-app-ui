@@ -1,17 +1,30 @@
 import React from "react";
+import { positionClassNames } from "./classNames";
 import "./Modal.css";
+import { trimWhiteSpaces } from "../utils";
 
 interface ModalProps {
     show: boolean;
-    onClose?: () => void;
-    children?: React.ReactNode;
+    position: "center" | "right";
+    children: React.ReactNode;
+    className?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ show, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({
+    show,
+    position,
+    className,
+    children
+}) => {
+    const positionClassName = positionClassNames[position];
+    const finalOverlayClassNames = trimWhiteSpaces(
+        `modal-overlay ${positionClassName} ${className || ""}`
+    );
+
     return (
         <>
             {show ? (
-                <div className="modal-overlay">
+                <div className={finalOverlayClassNames}>
                     <div className="modal">{children}</div>
                 </div>
             ) : null}

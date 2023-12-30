@@ -6,9 +6,7 @@
     font-family: inherit;
     font-size: var(--font-size-16);
     color: var(--jaguar-900);
-    resize: none;
     width: 100%;
-    display: block;
 }
 
 input::placeholder,
@@ -61,19 +59,39 @@ input::placeholder,
     color: var(--jaguar-300);
 }
 
-.input-wrapper label {
-    display: block;
-    margin-bottom: var(--space-2);
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
 }
 
-.input.input-textarea.input-small {
+.input-wrapper label {
+    display: block;
+}
+
+.input-textarea {
+    resize: none;
+}
+
+.input-textarea.input-small {
     height: 7.2rem;
 }
 
-.input.input-textarea.input-medium {
+.input-textarea.input-medium {
     height: 12rem;
 }
 
-.input.input-textarea.input-large {
+.input-textarea.input-large {
     height: 13.4rem;
+}
+
+.hint-message {
+    font-size: var(--font-size-12);
+    line-height: var(--line-height-18);
+    color: var(--jaguar-500);
+    font-weight: var(--font-weight-400);
+}
+
+.hint-message--error {
+    color: var(--red-orange-500);
 }
