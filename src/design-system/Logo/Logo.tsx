@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../../assets/images/logo.svg";
 import { trimWhiteSpaces } from "../utils";
-
 import "./Logo.css";
 
 type LogoProps = {
