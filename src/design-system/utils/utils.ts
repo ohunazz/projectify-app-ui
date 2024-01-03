@@ -1,6 +1,6 @@
 export const trimWhiteSpaces = (str: string) => {
     return str
-        .split("")
+        .split(" ")
         .filter((item) => item !== "")
         .join(" ");
 };

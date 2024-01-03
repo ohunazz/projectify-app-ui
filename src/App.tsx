@@ -1,5 +1,7 @@
+import { Signup } from "./pages/admin-auth/sign-up/SignUp";
+
 const App = () => {
-    return <div style={{ padding: "100px" }}></div>;
+    return <Signup />;
 };
 
 export { App };

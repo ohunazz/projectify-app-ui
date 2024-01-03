@@ -22,7 +22,7 @@ const AuthWrapper: FC<AuthWrapperProps> = ({
                 </div>
             </section>
             <section className="auth-wrapper__image">
-                <img src={imageUrl} alt="Projectify App | Hands making star" />
+                <img src={imageUrl} alt="Projectify App | Team" />
             </section>
         </main>
     );

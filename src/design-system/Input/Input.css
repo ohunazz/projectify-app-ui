@@ -6,7 +6,6 @@
     font-family: inherit;
     font-size: var(--font-size-16);
     color: var(--jaguar-900);
-    width: 100%;
 }
 
 input::placeholder,

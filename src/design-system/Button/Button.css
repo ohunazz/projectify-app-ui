@@ -5,7 +5,6 @@
     line-height: var(--line-height-20);
     border: none;
     outline: none;
-
     height: 3.6rem;
     padding: 0 var(--space-16);
 }
