@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 
-import teamWork from "../../../assets/images/team.jpg";
+import teamWork from "../../../assets/images/team.png";
 import "./Login.css";
 
 const Login = () => {
