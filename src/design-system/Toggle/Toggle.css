@@ -1,0 +1,32 @@
+.toggle__track {
+    height: 2rem;
+    width: 3.8rem;
+    padding: var(--space-2);
+    border-radius: var(--border-radius-20);
+    background-color: var(--jaguar-100);
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.toggle__track--round {
+    border-radius: var(--border-radius-4);
+}
+
+.toggle__track--on {
+    background-color: var(--primary-500);
+}
+
+.toggle__thumb {
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: var(--border-radius-20);
+    background-color: var(--white);
+    transition: all 0.2s;
+}
+.toggle__thumb--round {
+    border-radius: var(--border-radius-2);
+}
+
+.toggle__thumb--on {
+    margin-left: 1.8rem;
+}
