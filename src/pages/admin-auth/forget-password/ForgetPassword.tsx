@@ -1,8 +1,15 @@
 import { useState } from "react";
+import styled from "styled-components";
 import { PasswordWrapper } from "../../components/password-wrapper/PasswordWrapper";
 import { Input, Button } from "../../../design-system";
 import forgotPassword from "../../../assets/images/forgot-password.svg";
-import "./ForgotPassword.css";
+
+const Form = styled.form`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-20);
+`;
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState<string>("");
@@ -18,11 +25,7 @@ const ForgotPassword = () => {
 
     return (
         <PasswordWrapper pageTitle="Forgot Password?" imageUrl={forgotPassword}>
-            <form
-                className="forgot-password"
-                onSubmit={getInstructions}
-                noValidate
-            >
+            <Form onSubmit={getInstructions}>
                 <Input
                     type="email"
                     placeholder="Email"
@@ -39,7 +42,7 @@ const ForgotPassword = () => {
                 >
                     Get Instructions
                 </Button>
-            </form>
+            </Form>
         </PasswordWrapper>
     );
 };
