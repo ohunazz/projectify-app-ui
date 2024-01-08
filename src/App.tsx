@@ -1,7 +1,5 @@
-import { AuthWrapper } from "./pages/components";
-
 const App = () => {
-    return <AuthWrapper />;
+    return <h1>I am home</h1>;
 };
 
 export { App };
