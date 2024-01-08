@@ -29,7 +29,7 @@ const SubmitButton = styled(Button)`
     grid-column: 1 / 3;
 `;
 
-const Signup = () => {
+const AdminSignup = () => {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [preferredName, setPreferredName] = useState<string>("");
@@ -133,4 +133,4 @@ const Signup = () => {
     );
 };
 
-export { Signup };
+export { AdminSignup };

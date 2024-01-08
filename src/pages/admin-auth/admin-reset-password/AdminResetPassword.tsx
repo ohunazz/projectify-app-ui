@@ -11,7 +11,7 @@ const Form = styled.form`
     gap: var(--space-20);
 `;
 
-const ResetPassword = () => {
+const AdminResetPassword = () => {
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
 
@@ -56,4 +56,4 @@ const ResetPassword = () => {
     );
 };
 
-export { ResetPassword };
+export { AdminResetPassword };

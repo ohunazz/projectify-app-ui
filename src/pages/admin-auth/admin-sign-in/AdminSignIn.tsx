@@ -12,7 +12,7 @@ const Form = styled.form`
     gap: var(--space-20);
 `;
 
-const Login = () => {
+const AdminSignin = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -30,7 +30,7 @@ const Login = () => {
     };
 
     return (
-        <AuthWrapper imageUrl={teamWork} pageTitle="Login">
+        <AuthWrapper imageUrl={teamWork} pageTitle="Signin">
             <Form>
                 <Input
                     type="email"
@@ -62,4 +62,4 @@ const Login = () => {
     );
 };
 
-export { Login };
+export { AdminSignin };

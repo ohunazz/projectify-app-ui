@@ -41,7 +41,7 @@ const AuthImageWrapper = styled.section<{ $switchLayout?: boolean }>`
 `;
 
 const AuthImage = styled.img.attrs({
-    alt: "New York Yellow Cabs"
+    alt: "Team Work"
 })`
     height: 100%;
     width: 100%;
