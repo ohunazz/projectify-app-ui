@@ -4,6 +4,7 @@ import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 
 import teamWork from "../../../assets/images/team.png";
+import { Icon } from "../../../design-system/Icon";
 
 const Form = styled.form`
     width: 100%;
@@ -125,9 +126,9 @@ const AdminSignup = () => {
                     shape="rounded"
                     size="lg"
                 />
-                <Button color="primary" size="lg" shape="rounded">
+                <SubmitButton color="primary" size="lg" shape="rounded">
                     Sign Up
-                </Button>
+                </SubmitButton>
             </Form>
         </AuthWrapper>
     );

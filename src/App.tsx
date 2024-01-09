@@ -1,5 +1,11 @@
+import { AdminSignup } from "./pages";
+
 const App = () => {
-    return <h1>I am home</h1>;
+    return (
+        <>
+            <AdminSignup />
+        </>
+    );
 };
 
 export { App };
