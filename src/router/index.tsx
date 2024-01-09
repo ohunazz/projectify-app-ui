@@ -9,7 +9,8 @@ import {
     AdminSignup,
     AdminSignin,
     AdminForgotPassword,
-    AdminResetPassword
+    AdminResetPassword,
+    AdminPlatform
 } from "../pages";
 
 export const router = createBrowserRouter(
@@ -26,6 +27,13 @@ export const router = createBrowserRouter(
                 path="/admin/reset-password"
                 element={<AdminResetPassword />}
             />
+
+            <Route path="/platform" element={<AdminPlatform />}>
+                <Route path="projects" />
+                <Route path="stories" />
+                <Route path="personal-tasks" />
+                <Route path="team-members" />
+            </Route>
         </>
     )
 );

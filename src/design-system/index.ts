@@ -6,3 +6,4 @@ export * from "./Modal";
 export * from "./utils";
 export * from "./Logo";
 export * from "./Toggle";
+export * from "./Sidebar";
