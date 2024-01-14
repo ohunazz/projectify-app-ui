@@ -20,7 +20,7 @@ export const router = createBrowserRouter(
             <Route path="/admin/sign-up" element={<AdminSignup />} />
             <Route path="/admin/sign-in" element={<AdminSignin />} />
             <Route
-                path="/admin/forget-password"
+                path="/admin/forgot-password"
                 element={<AdminForgotPassword />}
             />
             <Route

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { PasswordWrapper } from "../../components/password-wrapper/PasswordWrapper";
+import { PasswordWrapper } from "../../components/PasswordWrapper";
 import { Input, Button } from "../../../design-system";
 import forgotPassword from "../../../assets/images/forgot-password.svg";
 

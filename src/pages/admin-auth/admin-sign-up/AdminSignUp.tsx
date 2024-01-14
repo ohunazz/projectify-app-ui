@@ -4,7 +4,6 @@ import { Button, Input } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 
 import teamWork from "../../../assets/images/team.png";
-import { Icon } from "../../../design-system/Icon";
 
 const Form = styled.form`
     width: 100%;
