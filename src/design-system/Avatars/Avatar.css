@@ -1,0 +1,81 @@
+.avatar {
+    font-family: inherit;
+    font-size: var(--font-size-16);
+    color: var(--white);
+    font-weight: var(--font-weight-500);
+    line-height: var(--line-height-20);
+    border: none;
+    outline: none;
+    height: 3.6rem;
+    margin-left: -15px;
+    background-color: var(--jaguar-400);
+    border: 1px solid white;
+}
+
+.avatar-small {
+    font-size: var(--font-size-12);
+    line-height: var(--line-height-10);
+    height: var(--space-24);
+    width: var(--space-24);
+    background-color: aquamarine;
+}
+
+.avatar-medium {
+    font-size: var(--font-size-14);
+    line-height: var(--line-height-20);
+    height: var(--space-32);
+    width: var(--space-32);
+}
+
+.avatar-large {
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-24);
+    height: var(--space-40);
+    width: var(--space-40);
+}
+
+.avatar-rounded {
+    border-radius: var(--border-radius-8);
+}
+
+.avatar-circle {
+    border-radius: 50%;
+}
+.avatar:hover {
+    box-shadow: var(--shadow-s-hover);
+}
+.avatar span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.avatar-small img {
+    border: 1px solid white;
+    object-fit: cover;
+    height: var(--space-24);
+    width: var(--space-24);
+}
+
+.avatar-medium img {
+    border: 1px solid white;
+    object-fit: cover;
+    height: var(--space-36);
+    width: var(--space-36);
+}
+
+.avatar-large img {
+    border: 1px solid white;
+    object-fit: cover;
+    height: var(--space-40);
+    width: var(--space-40);
+}
+
+.avatar-rounded img {
+    border-radius: var(--border-radius-8);
+}
+
+.avatar-circle img {
+    border-radius: 50%;
+}

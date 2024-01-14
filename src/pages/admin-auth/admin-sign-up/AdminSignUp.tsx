@@ -125,9 +125,9 @@ const AdminSignup = () => {
                     shape="rounded"
                     size="lg"
                 />
-                <Button color="primary" size="lg" shape="rounded">
+                <SubmitButton color="primary" size="lg" shape="rounded">
                     Sign Up
-                </Button>
+                </SubmitButton>
             </Form>
         </AuthWrapper>
     );
