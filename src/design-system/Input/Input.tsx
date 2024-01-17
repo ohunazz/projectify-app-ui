@@ -6,16 +6,16 @@ import { Label } from "../Label";
 const sizeClassNames = {
     sm: "input-small",
     md: "input-medium",
-    lg: "input-large"
+    lg: "input-large",
 };
 
 const shapeClassNames = {
     rounded: "input-rounded",
-    circle: "input-circle"
+    circle: "input-circle",
 };
 
 type InputProps = {
-    type?: "email" | "password" | "tel" | "textarea" | "text";
+    type?: "text" | "email" | "password" | "tel" | "textarea";
     disabled?: boolean;
     placeholder: string;
     className?: string;
@@ -30,7 +30,6 @@ type InputProps = {
     onChange: (value: string) => void;
     value: string;
 };
-
 const Input: React.FC<InputProps> = (props) => {
     const {
         type,
@@ -44,7 +43,7 @@ const Input: React.FC<InputProps> = (props) => {
         className,
         id,
         onChange,
-        value
+        value,
     } = props;
 
     const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
@@ -55,12 +54,10 @@ const Input: React.FC<InputProps> = (props) => {
     const textareaClassName = type === "textarea" ? "input-textarea" : "";
 
     const finalClassNames = trimWhiteSpaces(
-        `input ${
-            className || ""
-        } ${sizeClassName} ${shapeClassName} ${errorClassName} ${textareaClassName}`
+        `input ${sizeClassName} ${shapeClassName} ${errorClassName} ${textareaClassName}`
     );
 
-    const hintMessageClassName = trimWhiteSpaces(
+    const hintMessageClass = trimWhiteSpaces(
         `hint-message ${error ? "hint-message--error" : ""}`
     );
 
@@ -73,7 +70,7 @@ const Input: React.FC<InputProps> = (props) => {
     };
 
     return (
-        <div className="input-wrapper">
+        <div className={`input-wrapper ${className || ""} `}>
             {labelText ? (
                 <Label htmlFor={id} disabled={disabled} error={error}>
                     {labelText}
@@ -91,16 +88,17 @@ const Input: React.FC<InputProps> = (props) => {
             ) : (
                 <input
                     className={finalClassNames}
-                    type={type}
+                    type={type || "text"}
                     placeholder={placeholder}
                     disabled={disabled}
                     id={id}
                     onChange={handleOnChange}
+                    value={value}
                 />
             )}
 
             {hintMessage ? (
-                <span className={hintMessageClassName}>{hintMessage}</span>
+                <span className={hintMessageClass}>{hintMessage}</span>
             ) : null}
         </div>
     );

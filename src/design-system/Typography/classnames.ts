@@ -14,14 +14,14 @@ export const variantClassNames = {
 
     subtitleLG: "subtitle-lg",
     subtitleMD: "subtitle-md",
-    subtitleSM: "subtitle-sm"
+    subtitleSM: "subtitle-sm",
 };
 
 export const weightClassNames = {
     normal: "font-weight-normal",
     medium: "font-weight-medium",
     semibold: "font-weight-semibold",
-    bold: "font-weight-bold"
+    bold: "font-weight-bold",
 };
 
 export const alignClassNames = {
@@ -29,5 +29,5 @@ export const alignClassNames = {
     left: "text-align-left",
     right: "text-align-right",
     justify: "text-align-justify",
-    inherit: "text-align-inherit"
+    inherit: "text-align-inherit",
 };

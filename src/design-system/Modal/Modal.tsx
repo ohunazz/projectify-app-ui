@@ -1,5 +1,5 @@
 import React from "react";
-import { positionClassNames } from "./classNames";
+import { positionClassNames } from "./classnames";
 import "./Modal.css";
 import { trimWhiteSpaces } from "../utils";
 
@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({
     show,
     position,
     className,
-    children
+    children,
 }) => {
     const positionClassName = positionClassNames[position];
     const finalOverlayClassNames = trimWhiteSpaces(

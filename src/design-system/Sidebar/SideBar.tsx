@@ -1,7 +1,6 @@
 import React from "react";
-
-import { Logo } from "../Logo";
 import "./SideBar.css";
+import { Logo } from "../Logo";
 
 type SideBarProps = {
     children: React.ReactNode;

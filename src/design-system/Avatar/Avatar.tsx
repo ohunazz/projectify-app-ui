@@ -15,12 +15,12 @@ type AvatarProps = {
 const sizeClassNames = {
     sm: "avatar-small",
     md: "avatar-medium",
-    lg: "avatar-large"
+    lg: "avatar-large",
 };
 
 const shapeClassNames = {
     rounded: "avatar-rounded",
-    circle: "avatar-circle"
+    circle: "avatar-circle",
 };
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -30,7 +30,7 @@ const Avatar: React.FC<AvatarProps> = ({
     size,
     imageUrl,
     onClick,
-    className
+    className,
 }) => {
     const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
     const shapeClassName = shape !== undefined ? shapeClassNames[shape] : "";

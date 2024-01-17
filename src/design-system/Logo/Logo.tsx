@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../assets/images/logo.svg";
 import { trimWhiteSpaces } from "../utils";
+
 import "./Logo.css";
 
 type LogoProps = {
@@ -12,15 +13,15 @@ type LogoProps = {
 
 const layoutClassNames = {
     horizontal: "logo-horizontal",
-    vertical: "logo-vertical"
+    vertical: "logo-vertical",
 };
 
 const sizeClassNames = {
     lg: "logo-large",
-    sm: "logo-small"
+    sm: "logo-small",
 };
 
-const Logo: React.FC<LogoProps> = ({ layout, size, className, customText }) => {
+const Logo: React.FC<LogoProps> = ({ layout, size, customText, className }) => {
     const layoutClassName = layout ? layoutClassNames[layout] : "";
     const sizeClassName = size ? sizeClassNames[size] : "";
 

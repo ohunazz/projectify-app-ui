@@ -5,7 +5,6 @@
     top: 0;
     right: 0;
     background-color: var(--overlay-40);
-
     display: flex;
 }
 
@@ -13,11 +12,14 @@
     justify-content: center;
     align-items: center;
 }
+
 .modal {
     min-width: 37rem;
     padding: var(--space-24);
     background-color: var(--white);
     border-radius: var(--border-radius-32);
+    box-shadow: var(--shadow-3xl);
+    transition: all 0.5s;
 }
 
 .modal-overlay--right {

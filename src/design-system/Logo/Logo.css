@@ -4,6 +4,10 @@
     align-content: center;
 }
 
+.logo.logo-small {
+    height: 4rem;
+}
+
 .logo__text {
     color: var(--black-900);
     font-weight: var(--font-weight-700);
@@ -39,4 +43,8 @@
 .logo-small .logo__text {
     font-size: var(--font-size-24);
     line-height: var(--line-heigh-28);
+    height: 4rem;
+
+    display: flex;
+    align-items: center;
 }

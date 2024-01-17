@@ -6,6 +6,8 @@
     font-family: inherit;
     font-size: var(--font-size-16);
     color: var(--jaguar-900);
+    width: 100%;
+    transition: all 0.3s;
 }
 
 input::placeholder,
@@ -61,7 +63,7 @@ input::placeholder,
 .input-wrapper {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: 4px;
 }
 
 .input-wrapper label {
@@ -70,6 +72,8 @@ input::placeholder,
 
 .input-textarea {
     resize: none;
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
 }
 
 .input-textarea.input-small {
