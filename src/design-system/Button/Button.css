@@ -5,8 +5,16 @@
     line-height: var(--line-height-20);
     border: none;
     outline: none;
+    display: block;
+
     height: 3.6rem;
     padding: 0 var(--space-16);
+
+    transition: all 0.3s;
+}
+
+.btn-full-width {
+    width: 100%;
 }
 
 .btn:hover {
@@ -55,7 +63,7 @@
 }
 
 .btn-primary:disabled {
-    background-color: var(--jaguar-300);
+    background-color: var(--primary-300);
 }
 
 .btn-primary:focus {
