@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Input, Modal, Typography, Button } from "../../../design-system";
 import { NoDataPlaceholder } from "../../components";
-import noProject from "../../../assets/illustrations/no-project.svg";
+import noTask from "../../../assets/illustrations/no-task.svg";
 
 const PageBase = styled.div`
     position: relative;
@@ -10,7 +10,7 @@ const PageBase = styled.div`
     height: 100%;
 `;
 
-const CreateProjectModalTitle = styled(Typography)`
+const CreateTaskModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 
@@ -26,31 +26,31 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-const Projects = () => {
-    const [projects, setProject] = useState<string[]>([]);
-    const [showCreateProjectModal, setShowCreateProjectModal] =
+const Tasks = () => {
+    const [tasks, setTasks] = useState<string[]>([]);
+    const [showCreateTaskModal, setShowCreateTaskModal] =
         useState<boolean>(false);
 
     return (
         <PageBase>
-            {!projects.length ? (
+            {!tasks.length ? (
                 <NoDataPlaceholder
-                    illustrationUrl={noProject}
-                    text="You don’t have any projects yet!"
-                    buttonText="Add a Project"
-                    buttonAction={() => setShowCreateProjectModal(true)}
+                    illustrationUrl={noTask}
+                    text="You don’t have any tasks yet!"
+                    buttonText="Add a Task"
+                    buttonAction={() => setShowCreateTaskModal(true)}
                 />
             ) : (
-                <h1>Projects</h1>
+                <h1>Tasks</h1>
             )}
 
-            <Modal show={showCreateProjectModal} position="center">
-                <CreateProjectModalTitle variant="paragraphLG" weight="medium">
-                    New Project
-                </CreateProjectModalTitle>
+            <Modal show={showCreateTaskModal} position="center">
+                <CreateTaskModalTitle variant="paragraphLG" weight="medium">
+                    New Task
+                </CreateTaskModalTitle>
                 <Inputs>
                     <Input
-                        placeholder="Project Name"
+                        placeholder="Task Name"
                         value=""
                         onChange={() => {}}
                         shape="rounded"
@@ -58,7 +58,7 @@ const Projects = () => {
                     />
                     <Input
                         type="textarea"
-                        placeholder="Project Description"
+                        placeholder="Task Description"
                         value=""
                         onChange={() => {}}
                         shape="rounded"
@@ -72,7 +72,7 @@ const Projects = () => {
                         shape="rounded"
                         variant="outlined"
                         fullWidth
-                        onClick={() => setShowCreateProjectModal(false)}
+                        onClick={() => setShowCreateTaskModal(false)}
                     >
                         Cancel
                     </Button>
@@ -85,4 +85,4 @@ const Projects = () => {
     );
 };
 
-export { Projects as AdminProjects };
+export { Tasks as AdminTasks };
