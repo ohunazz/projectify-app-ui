@@ -33,7 +33,7 @@ const NoDataPlaceholder: React.FC<NoDatePlaceholderProps> = ({
     illustrationUrl,
     text,
     buttonText,
-    buttonAction
+    buttonAction,
 }) => {
     return (
         <NoDataPlaceholderBase>
