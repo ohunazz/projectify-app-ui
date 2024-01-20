@@ -1,16 +1,9 @@
-import { UserRole, UserType } from "../types";
+import { UserType } from "../types";
 
-type SignUpInput = {
-    firstName: string;
-    lastName: string;
-    preferredName?: string;
+type CreatePasswordInput = {
     email: string;
     password: string;
     passwordConfirm: string;
-    company?: {
-        name: string;
-        position: string;
-    };
 };
 
 type SignInInput = {
@@ -22,24 +15,27 @@ export type GetMeResponseType = {
     data: UserType;
 };
 
-class Admin {
+class TeamMember {
     url: string;
     constructor() {
         this.url = `${
             process.env.NODE_ENV === "development"
                 ? process.env.REACT_APP_PROJECTIFY_API_URL_LOCAL
                 : process.env.REACT_APP_PROJECTIFY_API_URL
-        }/admins`;
+        }/team-members`;
     }
-    async signUp(input: SignUpInput) {
+    async createPassword(input: CreatePasswordInput, inviteToken: string) {
         try {
-            const response = await fetch(`${this.url}/sign-up`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(input)
-            });
+            const response = await fetch(
+                `${this.url}/create-password?inviteToken=${inviteToken}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(input)
+                }
+            );
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message);
@@ -50,9 +46,7 @@ class Admin {
         }
     }
 
-    async signIn(
-        input: SignInInput
-    ): Promise<{ message: string; token: string }> {
+    async signIn(input: SignInInput): Promise<{ token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
@@ -142,4 +136,4 @@ class Admin {
     }
 }
 
-export const admin = new Admin();
+export const teamMember = new TeamMember();
