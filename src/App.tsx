@@ -14,15 +14,15 @@ const App = () => {
             <h1>You are at Home</h1>
             <Link to="admin/sign-up">Admin Sign up</Link>
             <Link to="admin/sign-in">Admin Sign in</Link>
-            <Link to="admin/forgot-password">Admin Forgot Password</Link>
+            <Link to="admin/forget-password">Admin Forgot Password</Link>
             <Link to="admin/reset-password">Admin Reset Password</Link>
-            <Link to="platform">Admin Platform</Link>
+            <Link to="admin/platform">Admin Platform</Link>
 
             <Link to="team-member/create-password">
                 Team Member Create Password
             </Link>
-            <Link to="team-member/login">Team Member Login</Link>
-            <Link to="team-member/forgot-password">
+            <Link to="team-member/sign-in">Team Member Login</Link>
+            <Link to="team-member/forget-password">
                 Team Member Forgot Password
             </Link>
             <Link to="team-member/reset-password">

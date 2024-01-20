@@ -6,14 +6,15 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
+import { AppProvider } from "./context";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
 root.render(
-    <React.StrictMode>
+    <AppProvider>
         <RouterProvider router={router} />
-    </React.StrictMode>
+    </AppProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
