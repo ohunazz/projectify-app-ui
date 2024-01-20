@@ -2,7 +2,7 @@ import { UserType } from "../../types";
 
 export enum Actions {
     INIT_USER = "INIT_USER",
-    SOME_TEST = "SOME_TEST",
+    RESET_STATE = "RESET_STATE"
 }
 
 export interface InitUserAction {
@@ -10,8 +10,8 @@ export interface InitUserAction {
     payload: UserType;
 }
 
-export interface UpdateProject {
-    type: Actions.SOME_TEST;
+export interface ResetStateAction {
+    type: Actions.RESET_STATE;
 }
 
-export type ActionType = InitUserAction | UpdateProject;
+export type ActionType = InitUserAction | ResetStateAction;
