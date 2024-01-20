@@ -85,4 +85,4 @@ const Tasks = () => {
     );
 };
 
-export { Tasks as TeamMemberPersonalTasks };
+export { Tasks as TeamMemberTasks };
