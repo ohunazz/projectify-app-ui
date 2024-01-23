@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { StatusBadge } from "./design-system/StatusBadge";
 
 const Base = styled.div`
     font-size: 1.6rem;
@@ -29,6 +30,11 @@ const App = () => {
                 Team Member Reset Password
             </Link>
             <Link to="team-member/platform">Team Member Platform</Link>
+
+            <StatusBadge status="ACTIVE" />
+            <StatusBadge status="INACTIVE" />
+            <StatusBadge status="COMPLETED" />
+            <StatusBadge status="ARCHIVED" />
         </Base>
     );
 };
