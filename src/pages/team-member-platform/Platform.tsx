@@ -43,9 +43,9 @@ const Platform = () => {
             <SideBar>
                 <SideBarUser
                     details={{
-                        firstName: "Asil",
-                        lastName: "Bek",
-                        email: "asilbek@gmail.com"
+                        firstName: "Okhun",
+                        lastName: "John",
+                        email: "okhun0709@gmail.com"
                     }}
                 />
                 <SideBarLinks links={links} logOut={logOut} />

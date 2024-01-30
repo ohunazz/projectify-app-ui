@@ -20,7 +20,7 @@ import {
     TeamMemberTasks
 } from "../pages";
 import { UserRole } from "../types";
-import { Private } from "./Private";
+import { ProtectedRoute } from "./ProtectedRoute";
 import { Auth } from "./Auth";
 
 export const router = createBrowserRouter(
@@ -66,7 +66,7 @@ export const router = createBrowserRouter(
             <Route
                 path="admin/platform"
                 element={
-                    <Private
+                    <ProtectedRoute
                         component={<AdminPlatform />}
                         userType={UserRole.admin}
                     />
@@ -94,7 +94,7 @@ export const router = createBrowserRouter(
             <Route
                 path="team-member/platform"
                 element={
-                    <Private
+                    <ProtectedRoute
                         component={<TeamMemberPlatform />}
                         userType={UserRole.teamMember}
                     />

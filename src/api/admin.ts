@@ -29,7 +29,7 @@ class Admin {
             process.env.NODE_ENV === "development"
                 ? process.env.REACT_APP_PROJECTIFY_API_URL_LOCAL
                 : process.env.REACT_APP_PROJECTIFY_API_URL
-        }/admins`;
+        }/admin`;
     }
     async signUp(input: SignUpInput) {
         try {

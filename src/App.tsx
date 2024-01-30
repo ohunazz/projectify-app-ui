@@ -30,11 +30,6 @@ const App = () => {
                 Team Member Reset Password
             </Link>
             <Link to="team-member/platform">Team Member Platform</Link>
-
-            <StatusBadge status="ACTIVE" />
-            <StatusBadge status="INACTIVE" />
-            <StatusBadge status="COMPLETED" />
-            <StatusBadge status="ARCHIVED" />
         </Base>
     );
 };
