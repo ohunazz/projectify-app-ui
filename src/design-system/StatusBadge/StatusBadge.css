@@ -1,0 +1,71 @@
+/* General styles for all badges */
+.status-badge-wrapper {
+    border-radius: var(--border-radius-8);
+    width: max-content;
+    padding: var(--space-8);
+    display: flex;
+    align-items: center;
+}
+
+.sign {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 0.2rem;
+    margin-right: 0.6rem;
+}
+
+/* Styles for ACTIVE badge */
+.ACTIVE-sign {
+    background-color: var(--dodger-blue-600);
+}
+
+.ACTIVE {
+    color: var(--dodger-blue-600);
+}
+
+.ACTIVE-badge-wrapper {
+    background-color: var(--dodger-blue-25);
+    border: 0.1rem solid var(--dodger-blue-200);
+}
+
+/* Styles for INACTIVE badge */
+.INACTIVE-sign {
+    background-color: var(--red-orange-600);
+}
+
+.INACTIVE {
+    color: var(--red-orange-600);
+}
+
+.INACTIVE-badge-wrapper {
+    background-color: var(--red-orange-25);
+    border: 0.1rem solid var(--red-orange-200);
+}
+
+/* Styles for COMPLETED badge */
+.COMPLETED-sign {
+    background-color: var(--green-600);
+}
+
+.COMPLETED {
+    color: var(--green-600);
+}
+
+.COMPLETED-badge-wrapper {
+    background-color: var(--green-25);
+    border: 0.1rem solid var(--green-200);
+}
+
+/* Styles for ARCHIVED badge */
+.ARCHIVED-sign {
+    background-color: var(--jaguar-400);
+}
+
+.ARCHIVED {
+    color: var(--jaguar-400);
+}
+
+.ARCHIVED-badge-wrapper {
+    background-color: var(--jaguar-25);
+    border: 0.1rem solid var(--jaguar-200);
+}
