@@ -15,16 +15,22 @@ const Form = styled.form`
 
 const ForgetPassword = () => {
     const [email, setEmail] = useState<string>("");
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
     const handleOnChangeEmail = (value: string) => {
         setEmail(value);
     };
 
+    const isFormSubmittable = email;
+
     const getInstructions = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
+            setIsFormSubmitting(true);
             const response = await admin.forgotPassword(email);
+
+            setIsFormSubmitting(false);
             setEmail("");
             toast.success(response.message);
         } catch (error) {
@@ -41,7 +47,7 @@ const ForgetPassword = () => {
                 pageTitle="Forget Password"
                 switchLayout
             >
-                <Form onSubmit={getInstructions}>
+                <Form onSubmit={getInstructions} noValidate>
                     <Input
                         type="email"
                         placeholder="Email"
@@ -55,7 +61,8 @@ const ForgetPassword = () => {
                         color="primary"
                         size="lg"
                         shape="rounded"
-                        className="forget-password__submit-button"
+                        fullWidth={true}
+                        disabled={isFormSubmitting || !isFormSubmittable}
                     >
                         Get Instructions
                     </Button>
