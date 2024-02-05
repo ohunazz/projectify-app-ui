@@ -6,7 +6,7 @@ import { Button, Input } from "../../../design-system";
 import { AuthActionLink, AuthWrapper } from "../../components";
 import { admin } from "../../../api";
 
-import teamWork from "../../../assets/images/flat-iron-building.jpg";
+import teamWork from "../../../assets/images/team-work.jpg";
 
 const Form = styled.form`
     width: 100%;

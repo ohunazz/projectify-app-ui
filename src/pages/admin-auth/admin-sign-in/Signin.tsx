@@ -42,6 +42,8 @@ const Signin = () => {
         setItem("authToken", token);
     };
 
+    const isFormSubmittable = email && password;
+
     const signin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
@@ -52,9 +54,6 @@ const Signin = () => {
             });
 
             saveAuthToken(token);
-
-            localStorage.setItem("authToken", token);
-            setItem("authToken", token);
             navigate("/admin/platform");
 
             setIsFormSubmitting(false);
@@ -64,6 +63,7 @@ const Signin = () => {
             if (error instanceof Error) {
                 setIsFormSubmitting(false);
                 setIsError(true);
+                toast.error(error.message);
             }
         }
     };
@@ -93,7 +93,8 @@ const Signin = () => {
                     color="primary"
                     size="lg"
                     shape="rounded"
-                    disabled={isFormSubmitting}
+                    fullWidth={true}
+                    disabled={isFormSubmitting || !isFormSubmittable}
                 >
                     Sign In
                 </Button>
