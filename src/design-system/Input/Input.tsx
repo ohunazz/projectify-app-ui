@@ -2,48 +2,37 @@ import React from "react";
 import "./Input.css";
 import { trimWhiteSpaces } from "../utils";
 import { Label } from "../Label";
+import { InputProps } from "./types";
 
 const sizeClassNames = {
     sm: "input-small",
     md: "input-medium",
-    lg: "input-large",
+    lg: "input-large"
 };
 
 const shapeClassNames = {
     rounded: "input-rounded",
-    circle: "input-circle",
+    circle: "input-circle"
 };
 
-type InputProps = {
-    type?: "text" | "email" | "password" | "tel" | "textarea";
-    disabled?: boolean;
-    placeholder: string;
-    className?: string;
-    id?: string;
-
-    error?: boolean;
-    shape?: "rounded" | "circle";
-    size?: "sm" | "md" | "lg";
-    hintMessage?: string;
-    labelText?: string;
-
-    onChange: (value: string) => void;
-    value: string;
-};
 const Input: React.FC<InputProps> = (props) => {
     const {
         type,
         error,
         disabled,
+        required,
         placeholder,
         shape,
         size,
         hintMessage,
         labelText,
+        inputRef,
         className,
         id,
+        showPassword,
+        children,
         onChange,
-        value,
+        value
     } = props;
 
     const sizeClassName = size !== undefined ? sizeClassNames[size] : "";
@@ -76,26 +65,45 @@ const Input: React.FC<InputProps> = (props) => {
                     {labelText}
                 </Label>
             ) : null}
-            {type === "textarea" ? (
-                <textarea
-                    placeholder={placeholder}
-                    className={finalClassNames}
-                    disabled={disabled}
-                    id={id}
-                    onChange={handleOnChange}
-                    value={value}
-                />
-            ) : (
-                <input
-                    className={finalClassNames}
-                    type={type || "text"}
-                    placeholder={placeholder}
-                    disabled={disabled}
-                    id={id}
-                    onChange={handleOnChange}
-                    value={value}
-                />
-            )}
+
+            {(() => {
+                switch (type) {
+                    case "textarea":
+                        return (
+                            <textarea
+                                placeholder={placeholder}
+                                className={finalClassNames}
+                                required={required}
+                                disabled={disabled}
+                                id={id}
+                                onChange={handleOnChange}
+                                value={value}
+                                ref={
+                                    inputRef as React.LegacyRef<HTMLTextAreaElement>
+                                }
+                            />
+                        );
+                    default:
+                        return (
+                            <>
+                                <input
+                                    className={finalClassNames}
+                                    type={type || "text"}
+                                    placeholder={placeholder}
+                                    disabled={disabled}
+                                    required={required}
+                                    id={id}
+                                    onChange={handleOnChange}
+                                    value={value}
+                                    ref={
+                                        inputRef as React.LegacyRef<HTMLInputElement>
+                                    }
+                                />
+                                {showPassword ? children : null}
+                            </>
+                        );
+                }
+            })()}
 
             {hintMessage ? (
                 <span className={hintMessageClass}>{hintMessage}</span>

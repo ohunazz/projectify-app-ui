@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { StatusBadge } from "./design-system/StatusBadge";
+import { DatePickerV1 } from "./design-system";
+import { useStore } from "./hooks";
+import { useState } from "react";
 
 const Base = styled.div`
     font-size: 1.6rem;
@@ -10,6 +12,7 @@ const Base = styled.div`
 `;
 
 const App = () => {
+    const [date, setDate] = useState<Date>();
     return (
         <Base>
             <h1>You are at Home</h1>
@@ -30,6 +33,14 @@ const App = () => {
                 Team Member Reset Password
             </Link>
             <Link to="team-member/platform">Team Member Platform</Link>
+
+            <div>
+                <DatePickerV1
+                    selected={date}
+                    onChange={(date) => setDate(date)}
+                    placeholder="Select Deadline"
+                />
+            </div>
         </Base>
     );
 };
