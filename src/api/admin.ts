@@ -1,4 +1,4 @@
-import { UserRole, UserType } from "../types";
+import { AdminUser } from "../types";
 
 type SignUpInput = {
     firstName: string;
@@ -19,7 +19,7 @@ type SignInInput = {
 };
 
 export type GetMeResponseType = {
-    data: UserType;
+    data: AdminUser;
 };
 
 class Admin {

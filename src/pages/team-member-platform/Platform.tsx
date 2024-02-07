@@ -1,15 +1,18 @@
-import { Outlet } from "react-router-dom";
-import { SideBar, SideBarLinks } from "../../design-system";
+import { Outlet, useNavigate } from "react-router-dom";
+import { SideBar, SideBarLinks, SideBarLinksGroup } from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-import { useNavigate } from "react-router-dom";
 import { useLocalStorage, useStore } from "../../hooks";
-import user from "../../assets/images/user.jpg";
 import { Actions } from "../../store";
 
-const links = [
+const links: SideBarLinksGroup[] = [
     {
         title: "Menu",
         links: [
+            {
+                linkText: "Projects",
+                linkTo: "projects",
+                iconName: "projects"
+            },
             {
                 linkText: "Stories",
                 linkTo: "stories",
@@ -21,31 +24,48 @@ const links = [
                 iconName: "tasks"
             }
         ]
+    },
+    {
+        title: "Settings",
+        links: [
+            {
+                linkText: "Settings",
+                linkTo: "settings",
+                iconName: "settings"
+            },
+            {
+                linkText: "Support",
+                linkTo: "support",
+                iconName: "support"
+            }
+        ]
     }
 ];
 
-const Platform = () => {
-    const navigate = useNavigate();
+const TeamMemberPlatform = () => {
     const {
         state: { user },
         dispatch
     } = useStore();
+    const navigate = useNavigate();
     const { removeItem } = useLocalStorage();
 
     const logOut = () => {
         removeItem("authToken");
+        removeItem("userRole");
         dispatch({ type: Actions.RESET_STATE });
+
         navigate("/team-member/sign-in");
     };
-
     return (
         <AppLayout>
             <SideBar>
                 <SideBarUser
                     details={{
-                        firstName: "Okhun",
-                        lastName: "John",
-                        email: "okhun0709@gmail.com"
+                        firstName: user?.firstName || "",
+                        lastName: user?.lastName || "",
+                        imageUrl: "",
+                        email: user?.email || ""
                     }}
                 />
                 <SideBarLinks links={links} logOut={logOut} />
@@ -57,4 +77,4 @@ const Platform = () => {
     );
 };
 
-export { Platform as TeamMemberPlatform };
+export { TeamMemberPlatform };

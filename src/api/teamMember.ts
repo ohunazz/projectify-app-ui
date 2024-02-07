@@ -1,4 +1,4 @@
-import { UserType } from "../types";
+import { TeamMemberUser } from "../types";
 
 type CreatePasswordInput = {
     email: string;
@@ -12,7 +12,7 @@ type SignInInput = {
 };
 
 export type GetMeResponseType = {
-    data: UserType;
+    data: TeamMemberUser;
 };
 
 class TeamMember {
