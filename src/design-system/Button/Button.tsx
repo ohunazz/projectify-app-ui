@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import "./Button.css";
-import { trimWhiteSpaces } from "../../utils";
+import { trimWhiteSpaces } from "../utils";
 
 type ButtonSize = "sm" | "md" | "lg";
 type ButtonShape = "rounded" | "circle";

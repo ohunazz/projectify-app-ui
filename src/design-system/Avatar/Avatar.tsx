@@ -1,6 +1,6 @@
 import React from "react";
 import "./Avatar.css";
-import { trimWhiteSpaces } from "../../utils";
+import { trimWhiteSpaces } from "../utils";
 
 type AvatarProps = {
     firstName: string;

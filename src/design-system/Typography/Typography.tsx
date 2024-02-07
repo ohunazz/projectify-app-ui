@@ -5,7 +5,7 @@ import {
     weightClassNames,
     alignClassNames
 } from "./classnames";
-import { trimWhiteSpaces } from "../../utils";
+import { trimWhiteSpaces } from "../utils";
 
 type TypographyVariant =
     | "displayLG"

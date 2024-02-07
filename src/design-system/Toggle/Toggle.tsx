@@ -1,6 +1,6 @@
 import React from "react";
 import "./Toggle.css";
-import { trimWhiteSpaces } from "../../utils";
+import { trimWhiteSpaces } from "../utils";
 
 interface ToggleProps {
     value: boolean;
