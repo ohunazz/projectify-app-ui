@@ -1,7 +1,7 @@
 import React from "react";
 import { positionClassNames } from "./classNames";
 import "./Modal.css";
-import { trimWhiteSpaces } from "../utils";
+import { trimWhiteSpaces } from "../../utils";
 
 interface ModalProps {
     show: boolean;

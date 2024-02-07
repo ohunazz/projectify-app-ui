@@ -1,6 +1,6 @@
 import React from "react";
 import "./Input.css";
-import { trimWhiteSpaces } from "../utils";
+import { trimWhiteSpaces } from "../../utils";
 import { Label } from "../Label";
 import { InputProps } from "./types";
 

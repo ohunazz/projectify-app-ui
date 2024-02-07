@@ -1,6 +1,6 @@
 import React from "react";
 import "./Toggle.css";
-import { trimWhiteSpaces } from "../utils";
+import { trimWhiteSpaces } from "../../utils";
 
 interface ToggleProps {
     value: boolean;
@@ -13,7 +13,7 @@ const Toggle: React.FC<ToggleProps> = ({
     value,
     onToggle,
     rounded,
-    className,
+    className
 }) => {
     const handleOnClick = () => {
         onToggle(!value);

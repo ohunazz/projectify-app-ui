@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
 import { InputSize } from "../Input/types";
-import { trimWhiteSpaces } from "../utils";
+import { trimWhiteSpaces } from "../../utils";
 import getDate from "date-fns/getDate";
 
 import "react-datepicker/dist/react-datepicker.css";

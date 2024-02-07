@@ -1,6 +1,6 @@
 import React from "react";
 import "./Label.css";
-import { trimWhiteSpaces } from "../utils";
+import { trimWhiteSpaces } from "../../utils";
 
 type LabelProps = {
     htmlFor?: string;
