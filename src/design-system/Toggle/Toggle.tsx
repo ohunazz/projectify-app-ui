@@ -13,7 +13,7 @@ const Toggle: React.FC<ToggleProps> = ({
     value,
     onToggle,
     rounded,
-    className,
+    className
 }) => {
     const handleOnClick = () => {
         onToggle(!value);

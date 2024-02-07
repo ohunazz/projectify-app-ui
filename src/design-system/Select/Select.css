@@ -1,0 +1,102 @@
+.select {
+    position: relative;
+    width: 100%;
+}
+
+.btn-secondary.select__header {
+    background-color: var(--white);
+    justify-content: space-between;
+    padding: 0 var(--space-8) 0 var(--space-16);
+    font-weight: var(--font-weight-400);
+}
+
+.btn-secondary.select__header:hover {
+    border-color: var(--primary-500);
+    background-color: var(--white);
+}
+
+.btn-secondary.select__header.select__header--has-selection {
+    color: var(--jaguar-900);
+}
+
+.btn-secondary.select__header:focus {
+    border-color: var(--primary-500);
+    background-color: var(--white);
+}
+
+.select__body {
+    position: absolute;
+    top: calc(100% + var(--space-4));
+    list-style-type: none;
+    border: var(--jaguar-100);
+    box-shadow: var(--shadow-m);
+    width: 100%;
+    padding: var(--space-4);
+    background-color: var(--white);
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.select-rounded .select__body {
+    border-radius: var(--border-radius-8);
+}
+
+.select-circle .select__body {
+    border-radius: var(--border-radius-20);
+}
+
+.select-large.select-circle .select__body {
+    border-radius: var(--border-radius-24);
+}
+
+.select__item {
+    height: 3.2rem;
+    color: var(--jaguar-900);
+    font-size: var(--font-size-16);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-12);
+    transition: all 0.3s;
+
+    cursor: pointer;
+}
+
+.select__item:hover {
+    background-color: var(--jaguar-100);
+}
+
+.select-medium .select__item {
+    height: 3.6rem;
+}
+
+.select-large .select__item {
+    height: 4rem;
+}
+
+.select-rounded .select__item {
+    border-radius: var(--border-radius-8);
+}
+
+.select-circle .select__item {
+    border-radius: var(--border-radius-20);
+}
+
+.select-large.select-circle .select__item {
+    border-radius: var(--border-radius-24);
+}
+
+.select__item--selected {
+    background-color: var(--jaguar-100);
+}
+
+.select__icon {
+    transition: 0.3s;
+    fill: var(--jaguar-500);
+}
+
+.select__icon--expanded {
+    transform: rotate(180deg);
+}

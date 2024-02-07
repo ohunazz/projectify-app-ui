@@ -1,16 +1,20 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { SideBar, SideBarLinks, Toaster } from "../../design-system";
+import {
+    SideBar,
+    SideBarLinks,
+    SideBarLinksGroup,
+    Toaster
+} from "../../design-system";
 import { AppContent, AppLayout, SideBarUser } from "../components";
-
 import { Actions } from "../../store/actions";
 import { useLocalStorage, useStore } from "../../hooks";
 
-const links = [
+const links: SideBarLinksGroup[] = [
     {
         title: "Menu",
         links: [
             {
-                linkText: "Project",
+                linkText: "Projects",
                 linkTo: "projects",
                 iconName: "projects"
             },
@@ -36,7 +40,7 @@ const links = [
         links: [
             {
                 linkText: "Settings",
-                linkTo: "settings",
+                linkTo: "../team-member/platform",
                 iconName: "settings"
             },
             {

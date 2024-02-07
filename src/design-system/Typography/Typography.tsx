@@ -3,7 +3,7 @@ import React from "react";
 import {
     variantClassNames,
     weightClassNames,
-    alignClassNames,
+    alignClassNames
 } from "./classnames";
 import { trimWhiteSpaces } from "../utils";
 
@@ -40,7 +40,7 @@ export const Typography: React.FC<TypographyProps> = ({
     weight,
     align,
     className,
-    children,
+    children
 }) => {
     const variantClassName = variantClassNames[variant];
     const weightClassName =

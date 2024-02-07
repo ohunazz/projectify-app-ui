@@ -5,23 +5,25 @@ import {
 } from "react-router-dom";
 import { App } from "../App";
 import {
-    AdminSignin,
     AdminSignup,
+    AdminSignin,
     AdminForgetPassword,
     AdminResetPassword,
     AdminPlatform,
     AdminProjects,
-    AdminPersonalTasks,
-    TeamMemberSignin,
-    TeamMemberForgetPassword,
-    TeamMemberResetPassword,
+    AdminTasksPage,
+    AdminTeamMembers,
     TeamMemberCreatePassword,
+    TeamMemberSignin,
     TeamMemberPlatform,
-    TeamMemberTasks
+    TeamMemberProjects,
+    TeamMemberTasks,
+    TeamMemberForgetPassword,
+    TeamMemberResetPassword
 } from "../pages";
-import { UserRole } from "../types";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { Auth } from "./Auth";
+import { UserRole } from "../types";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -46,7 +48,7 @@ export const router = createBrowserRouter(
                 }
             />
             <Route
-                path="admin/forget-password"
+                path="admin/forgot-password"
                 element={
                     <Auth
                         component={<AdminForgetPassword />}
@@ -73,23 +75,41 @@ export const router = createBrowserRouter(
                 }
             >
                 <Route path="projects" element={<AdminProjects />} />
-                <Route path="stories" element={<h1>Stories</h1>} />
-                <Route path="personal-tasks" element={<AdminPersonalTasks />} />
-                <Route path="team-members" element={<h1>Members</h1>} />
+
+                <Route path="personal-tasks" element={<AdminTasksPage />} />
+                <Route path="team-members" element={<AdminTeamMembers />} />
             </Route>
 
-            <Route path="team-member/sign-in" element={<TeamMemberSignin />} />
-            <Route
-                path="team-member/forget-password"
-                element={<TeamMemberForgetPassword />}
-            />
-            <Route
-                path="team-member/reset-password"
-                element={<TeamMemberResetPassword />}
-            />
             <Route
                 path="team-member/create-password"
                 element={<TeamMemberCreatePassword />}
+            />
+            <Route
+                path="team-member/sign-in"
+                element={
+                    <Auth
+                        component={<TeamMemberSignin />}
+                        userType={UserRole.teamMember}
+                    />
+                }
+            />
+            <Route
+                path="team-member/forgot-password"
+                element={
+                    <Auth
+                        component={<TeamMemberForgetPassword />}
+                        userType={UserRole.teamMember}
+                    />
+                }
+            />
+            <Route
+                path="/team-member/reset-password"
+                element={
+                    <Auth
+                        component={<TeamMemberResetPassword />}
+                        userType={UserRole.teamMember}
+                    />
+                }
             />
             <Route
                 path="team-member/platform"
@@ -100,9 +120,9 @@ export const router = createBrowserRouter(
                     />
                 }
             >
-                <Route path="stories" element={<h1>Stories</h1>} />
+                <Route path="projects" element={<TeamMemberProjects />} />
+
                 <Route path="personal-tasks" element={<TeamMemberTasks />} />
-                <Route path="team-members" element={<h1>Members</h1>} />
             </Route>
         </>
     )

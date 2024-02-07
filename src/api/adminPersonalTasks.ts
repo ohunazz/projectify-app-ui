@@ -1,12 +1,21 @@
-import { Task } from "../types";
+import { Task, TaskStatus } from "../types";
 
-type TaskCreateInput = Omit<Task, "id" | "status">;
-type TaskUpdateInput = Omit<Task, "id">;
+export type TaskCreateInput = Omit<Task, "id" | "status">;
+export type TaskUpdateInput = {
+    title?: string;
+    description?: string;
+    due?: Date;
+    status?: TaskStatus;
+};
 
 interface GetAllTasksResponse {
     data: {
         tasks: Task[];
     };
+}
+
+interface TaskCreateResponse {
+    data: Task;
 }
 
 class AdminPersonalTasks {
@@ -19,7 +28,7 @@ class AdminPersonalTasks {
         }/admins/me`;
     }
 
-    async createTask(input: TaskCreateInput) {
+    async createTask(input: TaskCreateInput): Promise<TaskCreateResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -42,7 +51,7 @@ class AdminPersonalTasks {
         }
     }
 
-    async getTasks(): Promise<{ data: GetAllTasksResponse }> {
+    async getTasks(): Promise<GetAllTasksResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -90,6 +99,7 @@ class AdminPersonalTasks {
             const response = await fetch(`${this.url}/tasks/${taskId}`, {
                 method: "PATCH",
                 headers: {
+                    "Content-Type": "application/json",
                     authorization: `Bearer ${authToken}`
                 },
                 body: JSON.stringify(input)
@@ -104,4 +114,4 @@ class AdminPersonalTasks {
     }
 }
 
-export const adminPersonalTasks = new AdminPersonalTasks();
+export const adminTasksService = new AdminPersonalTasks();

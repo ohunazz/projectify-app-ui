@@ -3,20 +3,16 @@ export enum UserRole {
     teamMember = "teamMember"
 }
 
-export interface UserType {
+interface User {
     firstName: string;
     lastName: string;
     email: string;
     id: string;
-    imageUrl?: string;
-    company: {
-        name: string;
-        position: string;
-    } | null;
     role: UserRole;
+    imageUrl?: string;
 }
 
-export interface AdminUser extends UserType {
+export interface AdminUser extends User {
     preferredFirstName: string;
     company: {
         name: string;
@@ -24,23 +20,21 @@ export interface AdminUser extends UserType {
     } | null;
 }
 
-export interface TeamMemberUser extends UserType {
+export interface TeamMemberUser extends User {
     position: string;
     status: string;
     adminId: string;
 }
 
-export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
-
 export interface Task {
     id: string;
     title: string;
     description: string;
-    due: string;
+    due: Date;
     status: TaskStatus;
 }
 
-export type ProjectStatus = "ACTIVE" | "ARCHIVED";
+export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
 
 export interface Project {
     id: string;
@@ -48,3 +42,4 @@ export interface Project {
     description: string;
     status: ProjectStatus;
 }
+export type ProjectStatus = "ACTIVE" | "ARCHIVED";

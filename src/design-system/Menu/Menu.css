@@ -1,0 +1,72 @@
+.menu {
+    position: relative;
+}
+
+.menu > svg {
+    cursor: pointer;
+    fill: var(--jaguar-400);
+}
+
+.menu__items {
+    background-color: var(--white);
+    border-radius: var(--border-radius-16);
+    box-shadow: var(--shadow-s-hover);
+    position: absolute;
+    top: 2.4rem;
+    right: 0;
+    min-width: 15rem;
+    list-style-type: none;
+}
+
+.menu__item {
+    height: 4.8rem;
+    padding-left: var(--space-20);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    cursor: pointer;
+    font-size: var(--font-size-16);
+    line-height: var(--line-height-24);
+    font-weight: var(--font-weight-500);
+    color: var(--jaguar-600);
+}
+
+.menu__item svg {
+    fill: var(--jaguar-600);
+    height: 2rem;
+    width: 2rem;
+}
+
+.menu__item:not(:last-child) {
+    border-bottom: 1px solid var(--jaguar-100);
+}
+
+.menu__item:first-child {
+    border-top-right-radius: var(--border-radius-16);
+    border-top-left-radius: var(--border-radius-16);
+}
+
+.menu__item:last-child {
+    border-bottom-right-radius: var(--border-radius-16);
+    border-bottom-left-radius: var(--border-radius-16);
+}
+
+.menu__item:hover {
+    background-color: var(--jaguar-50);
+}
+
+.menu__item.menu__item--danger {
+    color: var(--red-orange-500);
+}
+
+.menu__item.menu__item--danger svg {
+    fill: var(--red-orange-500);
+}
+
+.menu__item.menu__item--primary {
+    color: var(--primary-500);
+}
+
+.menu__item.menu__item--primary svg {
+    fill: var(--primary-500);
+}

@@ -10,5 +10,12 @@ export * from "./Icon";
 export * from "./SideBar";
 export * from "./Toast";
 export * from "./DatePicker";
+export * from "./Select";
+export * from "./Checkbox";
+export * from "./Switch";
+export * from "./hooks";
+export * from "./Badge";
+export * from "./Menu";
+export * from "./Bar";
 
 export * from "./utils";
