@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { useLocalStorage } from "../../../hooks";
 
 import brooklynBridge from "../../../assets/images/brooklyn-bridge.jpg";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 
 const Form = styled.form`
     width: 100%;
@@ -48,10 +48,11 @@ const Signin = () => {
         e.preventDefault();
         try {
             setIsFormSubmitting(true);
-            const { token } = await admin.signIn({
+            const { token } = await adminService.signIn({
                 email,
                 password
             });
+            console.log(token);
 
             saveAuthToken(token);
             navigate("/admin/platform");

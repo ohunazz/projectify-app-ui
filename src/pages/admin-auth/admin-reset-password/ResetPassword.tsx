@@ -3,7 +3,7 @@ import { Input, Button } from "../../../design-system";
 import { AuthActionLink, AuthWrapper } from "../../components";
 import toast from "react-hot-toast";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 import resetPasswordImg from "../../../assets/illustrations/reset-password.svg";
 import styled from "styled-components";
 
@@ -31,7 +31,7 @@ const ResetPassword = () => {
         e.preventDefault();
 
         try {
-            const response = await admin.resetPassword(
+            const response = await adminService.resetPassword(
                 newPassword,
                 newPasswordConfirm,
                 passwordResetToken as string

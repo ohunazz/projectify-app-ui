@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Button, Input, Toaster } from "../../../design-system";
 import { AuthWrapper } from "../../components";
 import manhattanStreet from "../../../assets/images/manhattan-street.jpg";
-import { admin } from "../../../api";
+import { adminService } from "../../../api";
 
 const Form = styled.form`
     width: 100%;
@@ -28,7 +28,7 @@ const ForgetPassword = () => {
 
         try {
             setIsFormSubmitting(true);
-            const response = await admin.forgotPassword(email);
+            const response = await adminService.forgotPassword(email);
 
             setIsFormSubmitting(false);
             setEmail("");
