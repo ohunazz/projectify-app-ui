@@ -18,7 +18,7 @@ type CreateTaskModalProps = {
     closeModal: () => void;
 };
 
-const CreateTaskModalTitle = styled(Typography)`
+const ModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 
@@ -81,9 +81,9 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
 
     return (
         <Modal show={show} position="center">
-            <CreateTaskModalTitle variant="paragraphLG" weight="medium">
+            <ModalTitle variant="paragraphLG" weight="medium">
                 New Task
-            </CreateTaskModalTitle>
+            </ModalTitle>
             <Inputs>
                 <Input
                     placeholder="Task Name"

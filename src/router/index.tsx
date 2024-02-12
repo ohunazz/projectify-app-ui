@@ -21,7 +21,7 @@ import {
     TeamMemberForgetPassword,
     TeamMemberResetPassword
 } from "../pages";
-import { ProtectedRoute } from "./ProtectedRoute";
+import { Private } from "./Private";
 import { Auth } from "./Auth";
 import { UserRole } from "../types";
 
@@ -68,7 +68,7 @@ export const router = createBrowserRouter(
             <Route
                 path="admin/platform"
                 element={
-                    <ProtectedRoute
+                    <Private
                         component={<AdminPlatform />}
                         userType={UserRole.admin}
                     />
@@ -114,7 +114,7 @@ export const router = createBrowserRouter(
             <Route
                 path="team-member/platform"
                 element={
-                    <ProtectedRoute
+                    <Private
                         component={<TeamMemberPlatform />}
                         userType={UserRole.teamMember}
                     />

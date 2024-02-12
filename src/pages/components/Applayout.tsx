@@ -11,4 +11,15 @@ const AppContent = styled.section`
     padding: var(--space-30);
 `;
 
-export { AppLayout, AppContent };
+const Page = styled.main`
+    position: relative;
+    width: 100%;
+    height: 100%;
+`;
+
+const PageContent = styled.section`
+    width: 90%;
+    margin: 0 auto;
+`;
+
+export { AppLayout, AppContent, Page, PageContent };

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Typography, Button } from "../../../design-system";
+import { Typography, Button } from "../../design-system";
 
 const PageHeaderBase = styled.header`
     display: flex;
