@@ -29,7 +29,7 @@ class Admin {
             process.env.NODE_ENV === "development"
                 ? process.env.REACT_APP_PROJECTIFY_API_URL_LOCAL
                 : process.env.REACT_APP_PROJECTIFY_API_URL
-        }/admin`;
+        }/admins`;
     }
     async signUp(input: SignUpInput) {
         try {
@@ -50,9 +50,7 @@ class Admin {
         }
     }
 
-    async signIn(
-        input: SignInInput
-    ): Promise<{ message: string; token: string }> {
+    async signIn(input: SignInInput): Promise<{ token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
                 method: "POST",
@@ -142,4 +140,4 @@ class Admin {
     }
 }
 
-export const admin = new Admin();
+export const adminService = new Admin();

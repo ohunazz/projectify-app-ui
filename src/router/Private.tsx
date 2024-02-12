@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useLocalStorage, useStore } from "../hooks";
-import { admin, teamMember } from "../api";
+import { adminService, teamMemberService } from "../api";
 import { UserRole } from "../types";
 import { Actions, InitUserAction } from "../store";
 
@@ -10,10 +10,7 @@ type ProtectedRouteProps = {
     userType: UserRole;
 };
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
-    component,
-    userType
-}) => {
+const Private: React.FC<ProtectedRouteProps> = ({ component, userType }) => {
     const [loading, setLoading] = useState(true);
     const { getItem, setItem } = useLocalStorage();
     const { dispatch } = useStore();
@@ -23,8 +20,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
     useEffect(() => {
         if (isAuthTokenExists) {
             const user = {
-                admin: admin,
-                teamMember: teamMember
+                admin: adminService,
+                teamMember: teamMemberService
             };
 
             user[userType]
@@ -62,9 +59,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
                 : "../team-member/sign-in";
         return <Navigate to={navigateTo} />;
     }
-
     if (loading) {
-        return <h1>Loading</h1>;
+        return null;
     }
 
     const userRole = getItem("userRole");
@@ -74,9 +70,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         return component;
     }
 
-    console.log("I am runnning");
-
     return <Navigate to="../" />;
 };
 
-export { ProtectedRoute };
+export { Private };
