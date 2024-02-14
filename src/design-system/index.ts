@@ -18,3 +18,4 @@ export * from "./Badge";
 export * from "./Menu";
 export * from "./Bar";
 export * from "./utils";
+export * from "./Table";

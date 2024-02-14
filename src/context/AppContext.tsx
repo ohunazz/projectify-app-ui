@@ -1,11 +1,5 @@
-import React, { useState, createContext, useReducer } from "react";
-import {
-    GlobalState,
-    initialState,
-    userReducer,
-    InitUserAction,
-    ActionType,
-} from "../store/";
+import React, { createContext, useReducer } from "react";
+import { GlobalState, initialState, ActionType, rootReducer } from "../store/";
 
 type AppContextType = {
     state: GlobalState;
@@ -14,18 +8,18 @@ type AppContextType = {
 
 export const AppContext = createContext<AppContextType>({
     state: initialState,
-    dispatch: () => {},
+    dispatch: () => {}
 });
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
-    children,
+    children
 }) => {
     const [state, dispatch] = useReducer<
         React.Reducer<GlobalState, ActionType>
-    >(userReducer, initialState);
+    >(rootReducer, initialState);
     const value = {
         state,
-        dispatch,
+        dispatch
     };
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
