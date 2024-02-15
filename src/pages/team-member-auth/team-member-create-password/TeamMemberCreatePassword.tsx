@@ -4,7 +4,7 @@ import styled from "styled-components";
 import toast from "react-hot-toast";
 import { Button, Input } from "../../../design-system";
 import { AuthActionLink, AuthWrapper } from "../../components";
-import { teamMember } from "../../../api";
+import { teamMemberService } from "../../../api";
 import teamWork from "../../../assets/images/team-work.jpg";
 
 const Form = styled.form`
@@ -50,7 +50,7 @@ const TeamMemberCreatePassword = () => {
         try {
             setIsFormSubmitting(true);
 
-            await teamMember.createPassword(
+            await teamMemberService.createPassword(
                 {
                     email,
                     password,

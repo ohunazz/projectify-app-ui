@@ -6,7 +6,7 @@ export * from "./admin-auth/admin-reset-password/ResetPassword";
 export * from "./admin-platform/Platform";
 export * from "./admin-platform/admin-projects/Projects";
 export * from "./admin-platform/admin-personal-tasks";
-export * from "./admin-platform/admin-team-members/TeamMembers";
+export * from "./admin-platform/admin-team-members";
 
 export * from "./team-member-auth/team-member-sign-in/TeamMemberSignin";
 export * from "./team-member-auth/team-member-forget-password/TeamMemberForgetPassword";
