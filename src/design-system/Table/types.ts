@@ -14,11 +14,15 @@ export interface TableRowProps {
 }
 
 export interface TableBodyCellProps {
-    align: HorizontalAlign;
+    align?: HorizontalAlign;
     children: React.ReactNode;
 }
 
 export interface TableHeadCellProps {
-    align: HorizontalAlign;
+    align?: HorizontalAlign;
+    children: React.ReactNode;
+}
+
+export interface TableProps {
     children: React.ReactNode;
 }
