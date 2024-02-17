@@ -1,6 +1,6 @@
 import { IconName } from "../Icon";
 
-export interface MenuItem {
+export interface MenuOption {
     label: string;
     iconName?: IconName;
     value: string;
@@ -8,7 +8,7 @@ export interface MenuItem {
 }
 
 export interface MenuProps {
-    items: MenuItem[];
+    options: MenuOption[];
     onSelect: (value: string) => void;
     customTrigger?: React.ReactNode;
     className?: string;

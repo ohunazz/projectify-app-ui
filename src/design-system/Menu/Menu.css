@@ -2,12 +2,12 @@
     position: relative;
 }
 
-.menu > svg {
+.menu__default-trigger {
     cursor: pointer;
     fill: var(--jaguar-400);
 }
 
-.menu__items {
+.menu__options {
     background-color: var(--white);
     border-radius: var(--border-radius-16);
     box-shadow: var(--shadow-s-hover);
@@ -16,11 +16,12 @@
     right: 0;
     min-width: 15rem;
     list-style-type: none;
+    z-index: 2;
 }
 
-.menu__item {
+.menu__option {
     height: 4.8rem;
-    padding-left: var(--space-20);
+    padding: 0 var(--space-16);
     display: flex;
     align-items: center;
     gap: var(--space-4);
@@ -31,42 +32,42 @@
     color: var(--jaguar-600);
 }
 
-.menu__item svg {
+.menu__option svg {
     fill: var(--jaguar-600);
     height: 2rem;
     width: 2rem;
 }
 
-.menu__item:not(:last-child) {
+.menu__option:not(:last-child) {
     border-bottom: 1px solid var(--jaguar-100);
 }
 
-.menu__item:first-child {
+.menu__option:first-child {
     border-top-right-radius: var(--border-radius-16);
     border-top-left-radius: var(--border-radius-16);
 }
 
-.menu__item:last-child {
+.menu__option:last-child {
     border-bottom-right-radius: var(--border-radius-16);
     border-bottom-left-radius: var(--border-radius-16);
 }
 
-.menu__item:hover {
+.menu__option:hover {
     background-color: var(--jaguar-50);
 }
 
-.menu__item.menu__item--danger {
+.menu__option.menu__option--danger {
     color: var(--red-orange-500);
 }
 
-.menu__item.menu__item--danger svg {
+.menu__item.menu__option--danger svg {
     fill: var(--red-orange-500);
 }
 
-.menu__item.menu__item--primary {
+.menu__option.menu__option--primary {
     color: var(--primary-500);
 }
 
-.menu__item.menu__item--primary svg {
+.menu__option.menu__option--primary svg {
     fill: var(--primary-500);
 }
