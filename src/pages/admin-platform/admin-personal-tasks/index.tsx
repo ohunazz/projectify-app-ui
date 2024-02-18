@@ -1,25 +1,17 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-
-import { NoDataPlaceholder, PageHeader } from "../../components";
-import noTask from "../../../assets/illustrations/no-task.svg";
+import {
+    NoDataPlaceholder,
+    Page,
+    PageContent,
+    PageHeader
+} from "../../components";
 import { adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, PopulateTasksAction } from "../../../store";
 import { groupTasksByStatus } from "../../../utils";
 import { CreateTaskModal } from "./CreateTaskModal";
 import { Kanban } from "./Kanban";
-
-const PageBase = styled.main`
-    position: relative;
-    width: 100%;
-    height: 100%;
-`;
-
-const PageContent = styled.section`
-    width: 80%;
-    margin: 0 auto;
-`;
+import noTask from "../../../assets/illustrations/no-task.svg";
 
 const AdminTasksPage = () => {
     const [isTasksFetching, setIsTasksFetching] = useState(true);
@@ -55,18 +47,20 @@ const AdminTasksPage = () => {
     const groupedTasks = groupTasksByStatus(adminPersonalTasks);
 
     return (
-        <PageBase>
+        <Page>
             {!adminPersonalTasks.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTask}
-                    text="You don’t have any tasks yet!"
+                    text="You don't have any tasks yet!"
                     buttonText="Add a Task"
                     buttonAction={() => setShowCreateTaskModal(true)}
                 />
             ) : (
                 <PageContent>
                     <PageHeader
-                        openCreateTaskModal={() => setShowCreateTaskModal(true)}
+                        pageTitle="Tasks"
+                        actionButtonText="Create A Task"
+                        actionButtonOnClick={() => setShowCreateTaskModal(true)}
                     />
                     <Kanban groupedTasks={groupedTasks} />
                 </PageContent>
@@ -75,7 +69,7 @@ const AdminTasksPage = () => {
                 show={showCreateTaskModal}
                 closeModal={() => setShowCreateTaskModal(false)}
             />
-        </PageBase>
+        </Page>
     );
 };
 

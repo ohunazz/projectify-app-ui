@@ -64,7 +64,7 @@ const TeamMemberCreatePassword = () => {
             setEmail("");
             setPassword("");
             setPasswordConfirm("");
-
+            toast.success("Great. Now you can sign in!");
             navigate("/team-member/sign-in");
         } catch (error) {
             if (error instanceof Error) {

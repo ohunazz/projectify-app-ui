@@ -1,30 +1,36 @@
 import styled from "styled-components";
-import { Typography, Button } from "../../design-system";
+import { Button, Typography } from "../../design-system";
 
+type PageHeaderProps = {
+    pageTitle: string;
+    actionButtonText: string;
+    actionButtonOnClick: () => void;
+};
 const PageHeaderBase = styled.header`
     display: flex;
     justify-content: space-between;
-`;
-const PageTitle = styled(Typography)`
-    margin-bottom: var(--space-36);
+    align-items: center;
+    margin-bottom: var(--space-30);
 `;
 
-const PageHeader: React.FC<{ openCreateTaskModal: () => void }> = ({
-    openCreateTaskModal
+const PageHeader: React.FC<PageHeaderProps> = ({
+    pageTitle,
+    actionButtonText,
+    actionButtonOnClick
 }) => {
     return (
         <PageHeaderBase>
-            <PageTitle variant="h6" weight="medium">
-                Personal Tasks
-            </PageTitle>
+            <Typography variant="h6" weight="medium">
+                {pageTitle}
+            </Typography>
             <Button
                 variant="contained"
                 color="primary"
                 size="md"
                 shape="rounded"
-                onClick={openCreateTaskModal}
+                onClick={actionButtonOnClick}
             >
-                Create A Task
+                {actionButtonText}
             </Button>
         </PageHeaderBase>
     );
