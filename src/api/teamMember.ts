@@ -1,8 +1,8 @@
 import {
-    AdminTeamMemberActions,
     AdminTeamMemberStatusChange,
     TeamMember,
-    TeamMemberUser
+    TeamMemberUser,
+    TeamMemberUpdate
 } from "../types";
 
 interface CreatePasswordInput {
@@ -228,6 +228,29 @@ class TeamMemberService {
                     }
                 }
             );
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async update(teamMemberId: string, updateData: TeamMemberUpdate) {
+        const rawAuthToken = localStorage.getItem("authToken");
+        const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+        try {
+            const response = await fetch(`${this.url}/${teamMemberId}/update`, {
+                method: "PATCH",
+                headers: {
+                    authorization: `Bearer ${authToken}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updateData)
+            });
 
             if (!response.ok) {
                 const data = await response.json();
