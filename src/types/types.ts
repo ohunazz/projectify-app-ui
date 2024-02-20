@@ -26,16 +26,21 @@ export interface TeamMemberUser extends User {
     adminId: string;
 }
 
+export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
 export interface Task {
     id: string;
     title: string;
     description: string;
-    due: Date;
+    due: string;
     status: TaskStatus;
 }
-export type TaskStatus = "TODO" | "INPROGRESS" | "DONE";
 
-export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
+export type TaskUpdate = {
+    title?: string;
+    description?: string;
+    due?: string;
+    status?: TaskStatus;
+};
 
 export enum AdminTeamMemberActions {
     edit = "edit",
@@ -43,7 +48,7 @@ export enum AdminTeamMemberActions {
     reactivate = "reactivate",
     deactivate = "deactivate"
 }
-
+export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
 export type AdminTeamMemberStatusChange = "reactivate" | "deactivate";
 
 export interface TeamMember {
@@ -53,21 +58,12 @@ export interface TeamMember {
     lastName: string;
     position: string;
     email: string;
-    joinDate: Date;
+    joinDate: string;
 }
-
-export interface Project {
-    id: string;
-    name: string;
-    description: string;
-    status: ProjectStatus;
-}
-
-export type ProjectStatus = "ACTIVE" | "ARCHIVED";
 
 export interface TeamMemberUpdate {
     firstName?: string;
     lastName?: string;
     position?: string;
-    joinDate?: Date;
+    joinDate?: string;
 }

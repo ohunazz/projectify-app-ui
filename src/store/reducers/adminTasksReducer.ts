@@ -10,6 +10,7 @@ import {
     UpdateTaskAction
 } from "../actions";
 import { TaskState } from "../state";
+import { Task } from "../../types";
 
 const adminTasksReducer = produce(
     (draft: TaskState, action: ActionType): TaskState => {
@@ -17,35 +18,35 @@ const adminTasksReducer = produce(
             case Actions.POPULATE_TASKS: {
                 const payload =
                     action.payload as PopulateTasksAction["payload"];
-                return payload;
+                return payload.reduce((acc: TaskState, task: Task) => {
+                    acc[task.id] = task;
+                    return acc;
+                }, {});
             }
             case Actions.ADD_TASK: {
                 const payload = action.payload as AddTaskAction["payload"];
-                draft.push(payload);
+                draft[payload.id] = payload;
                 return draft;
             }
             case Actions.CHANGE_TASK_STATUS: {
                 const payload =
                     action.payload as ChangeTaskStatusAction["payload"];
-
-                for (let i = 0; i < draft.length; i++) {
-                    const task = draft[i];
-                    if (task.id === payload.id) {
-                        task.status = payload.status;
-                        break;
-                    }
+                const task = draft[payload.id];
+                if (task) {
+                    task.status = payload.status;
                 }
                 return draft;
             }
 
             case Actions.UPDATE_TASK: {
-                const payload = action.payload as UpdateTaskAction["payload"];
-                for (let i = 0; i < draft.length; i++) {
-                    const task = draft[i];
-                    if (task.id === payload.id) {
-                        draft[i] = payload;
-                        break;
-                    }
+                const { id, data } =
+                    action.payload as UpdateTaskAction["payload"];
+                const task = draft[id];
+                if (task) {
+                    task.title = data.title || task.title;
+                    task.status = data.status || task.status;
+                    task.due = data.due || task.due;
+                    task.description = data.description || task.description;
                 }
 
                 return draft;
@@ -53,13 +54,14 @@ const adminTasksReducer = produce(
 
             case Actions.REMOVE_TASK: {
                 const payload = action.payload as RemoveTaskAction["payload"];
-
-                return draft.filter((task) => task.id !== payload.id);
+                delete draft[payload.id];
+                return draft;
             }
 
             case Actions.RESET_STATE: {
-                return [];
+                return {};
             }
+
             default:
                 return draft;
         }

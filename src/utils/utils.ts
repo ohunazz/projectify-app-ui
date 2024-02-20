@@ -1,3 +1,4 @@
+import { formatISO, parseISO } from "date-fns";
 import { Task } from "../types";
 
 export interface GroupedTasks {
@@ -17,4 +18,12 @@ export const groupTasksByStatus = (data: Task[]): GroupedTasks => {
     });
 
     return grouped;
+};
+
+export const toIso8601 = (date: Date) => {
+    return formatISO(date);
+};
+
+export const toDateObj = (iso8601: string) => {
+    return parseISO(iso8601);
 };

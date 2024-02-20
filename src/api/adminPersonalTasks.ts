@@ -1,12 +1,6 @@
-import { Task, TaskStatus } from "../types";
+import { Task, TaskUpdate } from "../types";
 
 export type TaskCreateInput = Omit<Task, "id" | "status">;
-export type TaskUpdateInput = {
-    title?: string;
-    description?: string;
-    due?: Date;
-    status?: TaskStatus;
-};
 
 interface GetAllTasksResponse {
     data: {
@@ -91,7 +85,7 @@ class AdminPersonalTasks {
         }
     }
 
-    async updateTask(taskId: string, input: TaskUpdateInput) {
+    async updateTask(taskId: string, input: TaskUpdate) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
