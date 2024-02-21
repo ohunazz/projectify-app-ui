@@ -1,1 +1,1 @@
-export * from "./DatePicker";
+export * from "./DatePickerV1";

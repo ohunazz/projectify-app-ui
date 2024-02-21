@@ -1,23 +1,23 @@
 import {
     AdminTeamMemberStatusChange,
     TeamMember,
-    TeamMemberUser,
-    TeamMemberUpdate
+    TeamMemberUpdate,
+    TeamMemberUser
 } from "../types";
 
+export type GetMeResponseType = {
+    data: TeamMemberUser;
+};
+
 interface CreatePasswordInput {
-    email: string;
     password: string;
     passwordConfirm: string;
+    email: string;
 }
 
 type SignInInput = {
     email: string;
     password: string;
-};
-
-export type GetMeResponseType = {
-    data: TeamMemberUser;
 };
 
 type CreateInput = Omit<TeamMember, "id" | "status">;
@@ -83,26 +83,6 @@ class TeamMemberService {
         }
     }
 
-    async createPassword(input: CreatePasswordInput, inviteToken: string) {
-        try {
-            const response = await fetch(`${this.url}/create-password`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${inviteToken}`
-                },
-                body: JSON.stringify(input)
-            });
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-            return response.json();
-        } catch (error) {
-            throw error;
-        }
-    }
-
     async signIn(input: SignInInput): Promise<{ token: string }> {
         try {
             const response = await fetch(`${this.url}/login`, {
@@ -111,55 +91,6 @@ class TeamMemberService {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(input)
-            });
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-            return response.json();
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async forgotPassword(email: string) {
-        try {
-            const response = await fetch(`${this.url}/forgot-password`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email
-                })
-            });
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-
-            return response.json();
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async resetPassword(
-        password: string,
-        passwordConfirm: string,
-        token: string
-    ) {
-        try {
-            const response = await fetch(`${this.url}/reset-password`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    password,
-                    passwordConfirm
-                })
             });
             if (!response.ok) {
                 const data = await response.json();
@@ -186,6 +117,26 @@ class TeamMemberService {
                 throw new Error(data.message);
             }
 
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async createPassword(input: CreatePasswordInput, inviteToken: string) {
+        try {
+            const response = await fetch(`${this.url}/create-password`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${inviteToken}`
+                },
+                body: JSON.stringify(input)
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
             return response.json();
         } catch (error) {
             throw error;

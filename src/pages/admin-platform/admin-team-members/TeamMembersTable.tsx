@@ -22,6 +22,8 @@ import {
 import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 import { ChangeTeamMemberStatusModal } from "./ChangeTeamMemberStatusModal";
+import { EditTeamMemberModal } from "./EditTeamMemberModal";
+import { parseISO } from "date-fns";
 
 type TeamMembersTableProps = {
     data: TeamMember[];
@@ -69,6 +71,9 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         setShowChangeTeamMemberStatusModal
     ] = useState(false);
 
+    const [showEditTeamMemberModal, setShowEditTeamMemberModal] =
+        useState(false);
+
     const onSelectActionCellMenu = (
         teamMemberId: string,
         action: AdminTeamMemberActions
@@ -82,6 +87,8 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
         ) {
             setChangeStatus(action);
             setShowChangeTeamMemberStatusModal(true);
+        } else if (action === AdminTeamMemberActions.edit) {
+            setShowEditTeamMemberModal(true);
         }
     };
 
@@ -141,7 +148,7 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                         weight="medium"
                                     >
                                         {format(
-                                            teamMember.joinDate,
+                                            parseISO(teamMember.joinDate),
                                             "MMM d, yyyy"
                                         )}
                                     </Typography>
@@ -187,6 +194,12 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                 teamMemberId={selectedTeamMemberId}
                 closeModal={() => setShowChangeTeamMemberStatusModal(false)}
                 changeStatus={changeStatus!}
+            />
+
+            <EditTeamMemberModal
+                show={showEditTeamMemberModal}
+                teamMemberId={selectedTeamMemberId}
+                closeModal={() => setShowEditTeamMemberModal(false)}
             />
         </>
     );
