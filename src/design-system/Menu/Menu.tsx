@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { MenuProps } from "./types";
 import "./Menu.css";
 import { Icon } from "../Icon";
