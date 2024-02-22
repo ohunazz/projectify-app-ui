@@ -1,11 +1,12 @@
 import { Option, OptionValue, SelectProps } from "./types";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Label } from "../Label";
 import { Button } from "../Button";
 import "./Select.css";
 import { trimWhiteSpaces } from "../utils";
 import { Icon } from "../Icon";
 import { useCloseWhenClickOutside } from "../hooks";
+import { Input } from "../Input";
 
 const sizeClassNames = {
     md: "select-medium",
@@ -37,6 +38,13 @@ const Select: React.FC<SelectProps> = (props) => {
 
     const { show: expanded, setShow: setExpanded } =
         useCloseWhenClickOutside(selectRef);
+    const [searchText, setSearchText] = useState("");
+
+    const filterOptions = () => {
+        return options.filter((option) =>
+            option.value.toString().includes(searchText)
+        );
+    };
 
     const onClickHeader = () => {
         setExpanded((prevValue) => !prevValue);
@@ -45,7 +53,9 @@ const Select: React.FC<SelectProps> = (props) => {
     const sizeClassName = size ? sizeClassNames[size] : "";
     const shapeClassName = shape ? shapeClassNames[shape] : "";
     const finalClassName = trimWhiteSpaces(
-        `select ${sizeClassName} ${shapeClassName} ${className || ""}`
+        `select ${sizeClassName} ${shapeClassName} ${className || ""} ${
+            searchable ? "select-searchable" : ""
+        }`
     );
 
     const finalHeaderClassName = trimWhiteSpaces(
@@ -66,6 +76,8 @@ const Select: React.FC<SelectProps> = (props) => {
     const finalHeaderPlaceholder = value
         ? getOptionLabel(value)
         : headerPlaceholder;
+
+    const filteredOptions = filterOptions();
 
     return (
         <div className={finalClassName} ref={selectRef}>
@@ -89,25 +101,46 @@ const Select: React.FC<SelectProps> = (props) => {
                 />
             </Button>
             {expanded && (
-                <ul className="select__body">
-                    {options.map((option) => {
-                        return (
-                            <li
-                                key={option.value}
-                                className={trimWhiteSpaces(
-                                    `select__item ${
-                                        value === option.value
-                                            ? "select__item--selected"
-                                            : ""
-                                    }`
-                                )}
-                                onClick={() => onSelectItem(option)}
-                            >
-                                {option.label}
+                <div className="select__body">
+                    <ul className="select__items">
+                        {searchable && (
+                            <li className="select__search">
+                                <Input
+                                    shape={shape}
+                                    value={searchText}
+                                    onChange={(value) => setSearchText(value)}
+                                    placeholder="Search"
+                                />
                             </li>
-                        );
-                    })}
-                </ul>
+                        )}
+
+                        {filteredOptions.map((option) => {
+                            return (
+                                <li
+                                    key={option.value}
+                                    className={trimWhiteSpaces(
+                                        `select__item ${
+                                            value === option.value
+                                                ? "select__item--selected"
+                                                : ""
+                                        }`
+                                    )}
+                                    onClick={() => onSelectItem(option)}
+                                >
+                                    {option.label}
+                                    {value === option.value && (
+                                        <Icon
+                                            iconName={
+                                                shape ? "check" : "check-sharp"
+                                            }
+                                            className="select__selected-icon"
+                                        />
+                                    )}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
             )}
         </div>
     );

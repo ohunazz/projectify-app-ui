@@ -19,6 +19,6 @@ export interface SelectProps {
     disabled?: true;
     error?: boolean;
     hintMessage?: string;
-    searchable?: string;
+    searchable?: true;
     className?: string;
 }
