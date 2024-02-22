@@ -32,7 +32,7 @@ export const TableHeadCellBase = styled.th<BaseCellProps>`
 export const TableBody = styled.tbody`
     ${TableRowBase} {
         height: 8.2rem;
-        box-shadow: var(--shadow-xs);
+        box-shadow: var(--shadow-s);
     }
     ${TableRowBase}:not(:last-child) {
         margin-bottom: var(--space-10);
@@ -40,8 +40,13 @@ export const TableBody = styled.tbody`
 `;
 
 export const TableHead = styled.thead`
+    position: sticky;
+    top: 0;
+    z-index: 1;
     ${TableRowBase} {
         height: 6rem;
+        border-radius: var(--border-radius-16);
+        background-color: var(--jaguar-50);
         margin-bottom: var(--space-4);
     }
 `;

@@ -4,6 +4,7 @@ import { TableProps } from "./types";
 
 export const TableBase = styled.table`
     width: 100%;
+    border-spacing: 0;
 `;
 
 const Table: React.FC<TableProps> = ({ children }) => {
