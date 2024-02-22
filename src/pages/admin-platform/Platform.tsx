@@ -5,7 +5,7 @@ import {
     SideBarLinksGroup,
     Toaster
 } from "../../design-system";
-import { AppContent, AppLayout, SideBarUser } from "../components";
+import { AppPage, AppLayout, SideBarUser } from "../components";
 import { Actions } from "../../store/actions";
 import { useLocalStorage, useStore } from "../../hooks";
 
@@ -83,9 +83,9 @@ const AdminPlatform = () => {
                     />
                     <SideBarLinks links={links} logOut={logOut} />
                 </SideBar>
-                <AppContent>
+                <AppPage>
                     <Outlet />
-                </AppContent>
+                </AppPage>
             </AppLayout>
             <Toaster />
         </>
