@@ -7,7 +7,7 @@ import { Actions, ChangeTaskStatusAction } from "../../../store";
 import { adminTasksService } from "../../../api";
 import { Typography } from "../../../design-system";
 import { TaskStatus } from "../../../types";
-import { KanbanCard, Scrollable } from "../../components";
+import { KanbanCard, KanbanCardBase, Scrollable } from "../../components";
 import { EditTaskModal } from "./EditTaskModal";
 import { DeleteTaskModal } from "./DeleteTaskModal";
 
@@ -36,11 +36,11 @@ const TasksColumns = styled.div`
 
 const TasksColumn = styled.div`
     height: 100%;
-    padding: 2.2rem 1rem 1rem 1rem;
+    padding: var(--space-24) 0 var(--space-10) var(--space-10);
     background-color: var(--jaguar-25);
     border-radius: var(--border-radius-16);
     border: 0.15rem solid var(--jaguar-100);
-    overflow: hidden;
+    overflow: auto;
 `;
 
 const TasksColumnTitle = styled(Typography)<{ color: string }>`
@@ -52,6 +52,9 @@ const KanbanCards = styled(Scrollable)`
     height: calc(
         100% - 4rem
     ); // Excluding Column Title Line-height + margin bottom of it
+    ${KanbanCardBase} {
+        width: calc(100% - var(--space-10));
+    }
 `;
 
 const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {

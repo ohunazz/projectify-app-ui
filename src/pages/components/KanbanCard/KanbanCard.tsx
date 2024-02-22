@@ -5,7 +5,7 @@ import { KanbanCardProps } from "./types";
 import { Badge, Bar, Menu, Typography } from "../../../design-system";
 import { toDateObj } from "../../../utils";
 
-const KanbanCardBase = styled.div<{ $isDragging: boolean }>`
+export const KanbanCardBase = styled.div<{ $isDragging: boolean }>`
     background-color: var(--white);
     padding: var(--space-16);
     border-radius: var(--border-radius-16);
