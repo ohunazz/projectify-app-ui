@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import toast from "react-hot-toast";
 import { GroupedTasks } from "../../../utils";
 import { useStore } from "../../../hooks";
@@ -21,10 +21,17 @@ enum StatusToTitle {
     DONE = "Done"
 }
 
-enum StatusToColor {
+enum StatusToColumnTitleColor {
     TODO = "var(--jaguar-500)",
     INPROGRESS = "var(--sunglow-700)",
     DONE = "var(--green-500)"
+}
+
+enum StatusToColumnBackground {
+    TODO = "gray",
+    INPROGRESS = "orange",
+    DONE = "green",
+    BLOCKED = "red"
 }
 
 const TasksColumns = styled.div`
@@ -34,13 +41,39 @@ const TasksColumns = styled.div`
     height: calc(100% - 7rem);
 `;
 
-const TasksColumn = styled.div`
+type TaskColumnProps = {
+    color: "gray" | "orange" | "green" | "red";
+};
+const TasksColumn = styled.div<TaskColumnProps>`
     height: 100%;
     padding: var(--space-24) 0 var(--space-10) var(--space-10);
-    background-color: var(--jaguar-25);
     border-radius: var(--border-radius-16);
-    border: 0.15rem solid var(--jaguar-100);
+    border: 0.15rem solid;
     overflow: auto;
+    ${(props) =>
+        props.color === "gray" &&
+        css`
+            background-color: var(--jaguar-25);
+            border-color: var(--jaguar-100);
+        `}
+    ${(props) =>
+        props.color === "orange" &&
+        css`
+            background-color: var(--sunglow-25);
+            border-color: var(--sunglow-100);
+        `}
+    ${(props) =>
+        props.color === "green" &&
+        css`
+            background-color: var(--green-25);
+            border-color: var(--green-100);
+        `}
+    ${(props) =>
+        props.color === "red" &&
+        css`
+            background-color: var(--red-orange-25);
+            border-color: var(--red-orange-100);
+        `}
 `;
 
 const TasksColumnTitle = styled(Typography)<{ color: string }>`
@@ -100,11 +133,20 @@ const Kanban: React.FC<KanbanProps> = ({ groupedTasks }) => {
                             key={groupName}
                             onDragOver={(e) => e.preventDefault()}
                             onDrop={(e) => onDrop(e, groupName as TaskStatus)}
+                            color={
+                                StatusToColumnBackground[
+                                    groupName as TaskStatus
+                                ]
+                            }
                         >
                             <TasksColumnTitle
                                 variant="paragraphSM"
                                 weight="semibold"
-                                color={StatusToColor[groupName as TaskStatus]}
+                                color={
+                                    StatusToColumnTitleColor[
+                                        groupName as TaskStatus
+                                    ]
+                                }
                             >
                                 {StatusToTitle[groupName as TaskStatus]}{" "}
                                 <span>({groupedTasks[groupName].length})</span>
