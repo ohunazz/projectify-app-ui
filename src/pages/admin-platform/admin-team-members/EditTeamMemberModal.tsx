@@ -2,25 +2,26 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 import {
-    Typography,
     Modal,
+    Typography,
+    Button,
     Input,
     DatePickerV1,
-    Button
+    Icon
 } from "../../../design-system";
-
 import { useStore } from "../../../hooks";
-import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
 import { teamMemberService } from "../../../api";
-import { formatISO, parseISO } from "date-fns";
+import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
+import { ChangePasswordModal } from "./ChangePasswordModal";
+import { toDateObj, toIso8601 } from "../../../utils";
 
-type ModalProps = {
+type EditTeamMemberModalProps = {
     show: boolean;
     closeModal: () => void;
     teamMemberId: string;
 };
 
-const ModalTitle = styled(Typography)`
+const EditTeamMemberModalTitle = styled(Typography)`
     margin-bottom: var(--space-24);
 `;
 
@@ -31,12 +32,31 @@ const Inputs = styled.div`
     margin-bottom: var(--space-24);
 `;
 
+const ActionLink = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--space-24);
+    align-items: center;
+    cursor: pointer;
+
+    .plus-icon {
+        fill: var(--primary-500);
+        height: 1.6rem;
+        width: 1.6rem;
+        margin-right: 0.6rem;
+    }
+
+    .update-password__link {
+        color: var(--primary-500);
+    }
+`;
+
 const Buttons = styled.div`
     display: flex;
     gap: var(--space-10);
 `;
 
-const EditTeamMemberModal: React.FC<ModalProps> = ({
+const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
     show,
     closeModal,
     teamMemberId
@@ -50,34 +70,33 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
         state: { teamMembers }
     } = useStore();
 
+    const [selectedTeamMemberId, setSelectedTeamMemberId] = useState("");
+    const [showChangePasswordModal, setShowChangePasswordModal] =
+        useState(false);
+
     useEffect(() => {
         const teamMember = teamMembers[teamMemberId];
+
         if (teamMember) {
             setFirstName(teamMember.firstName);
             setLastName(teamMember.lastName);
             setPosition(teamMember.position);
-            setJoinDate(parseISO(teamMember.joinDate));
+            setJoinDate(toDateObj(teamMember.joinDate));
         }
     }, [teamMemberId]);
 
-    const handleOnChangeFirstName = (value: string) => {
-        setFirstName(value);
-    };
-
-    const handleOnChangeLastName = (value: string) => {
-        setLastName(value);
-    };
-
-    const handlOnChangePosition = (value: string) => {
-        setPosition(value);
+    const handleOnClickUpdatePassword = (teamMemberId: string) => {
+        setSelectedTeamMemberId(teamMemberId);
+        setShowChangePasswordModal(true);
+        // closeModal();
     };
 
     const updateTeamMember = () => {
         const updateData = {
-            firstName,
-            lastName,
-            joinDate: formatISO(joinDate!),
-            position
+            firstName: firstName,
+            lastName: lastName,
+            position: position,
+            joinDate: toIso8601(joinDate!)
         };
 
         teamMemberService
@@ -99,15 +118,15 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
 
     return (
         <Modal show={show} position="center">
-            <ModalTitle variant="paragraphLG" weight="medium">
-                Update Member
-            </ModalTitle>
+            <EditTeamMemberModalTitle variant="paragraphLG" weight="medium">
+                Edit Team Member
+            </EditTeamMemberModalTitle>
             <Inputs>
                 <Input
                     type="text"
                     placeholder="First Name"
                     value={firstName}
-                    onChange={handleOnChangeFirstName}
+                    onChange={(value) => setFirstName(value)}
                     shape="rounded"
                     size="lg"
                 />
@@ -115,20 +134,18 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                     type="text"
                     placeholder="Last Name"
                     value={lastName}
-                    onChange={handleOnChangeLastName}
+                    onChange={(value) => setLastName(value)}
                     shape="rounded"
                     size="lg"
                 />
-
                 <Input
                     type="text"
                     placeholder="Position"
                     value={position}
-                    onChange={handlOnChangePosition}
+                    onChange={(value) => setPosition(value)}
                     shape="rounded"
                     size="lg"
                 />
-
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
@@ -137,6 +154,22 @@ const EditTeamMemberModal: React.FC<ModalProps> = ({
                     onChange={(date) => setJoinDate(date)}
                 />
             </Inputs>
+            <ActionLink
+                onClick={() => handleOnClickUpdatePassword(teamMemberId)}
+            >
+                <Icon iconName="plus" className="plus-icon" />
+                <Typography
+                    variant="paragraphSM"
+                    className="update-password__link"
+                >
+                    Update Password
+                </Typography>
+                <ChangePasswordModal
+                    show={showChangePasswordModal}
+                    teamMemberId={selectedTeamMemberId}
+                    closeModal={() => setShowChangePasswordModal(false)}
+                />
+            </ActionLink>
             <Buttons>
                 <Button
                     color="secondary"

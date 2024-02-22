@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NoDataPlaceholder, Page, PageContent } from "../../components";
+import { NoDataPlaceholder } from "../../components";
 import { CreateTeamMemberModal } from "./CreateTeamMemberModal";
 import noTeamMember from "../../../assets/illustrations/no-member.svg";
 import { useStore } from "../../../hooks";
@@ -40,7 +40,7 @@ const AdminTeamMembersPage = () => {
     if (isTeamMembersFetching) return null;
 
     return (
-        <Page>
+        <>
             {!teamMembers.length ? (
                 <NoDataPlaceholder
                     illustrationUrl={noTeamMember}
@@ -49,7 +49,7 @@ const AdminTeamMembersPage = () => {
                     buttonAction={() => setShowCreateTeamMemberModal(true)}
                 ></NoDataPlaceholder>
             ) : (
-                <PageContent>
+                <>
                     <PageHeader
                         pageTitle="Team Members"
                         actionButtonText="Create A Member"
@@ -59,14 +59,14 @@ const AdminTeamMembersPage = () => {
                     />
                     <TeamMemberFilters />
                     <TeamMembersTable data={teamMembers} />
-                </PageContent>
+                </>
             )}
 
             <CreateTeamMemberModal
                 show={showCreateTeamMemberModal}
                 closeModal={() => setShowCreateTeamMemberModal(false)}
             />
-        </Page>
+        </>
     );
 };
 

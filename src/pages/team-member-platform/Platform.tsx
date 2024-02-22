@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { SideBar, SideBarLinks, SideBarLinksGroup } from "../../design-system";
-import { AppContent, AppLayout, SideBarUser } from "../components";
+import { AppPage, AppLayout, SideBarUser } from "../components";
 import { useLocalStorage, useStore } from "../../hooks";
 import { Actions } from "../../store";
 
@@ -70,9 +70,9 @@ const TeamMemberPlatform = () => {
                 />
                 <SideBarLinks links={links} logOut={logOut} />
             </SideBar>
-            <AppContent>
+            <AppPage>
                 <Outlet />
-            </AppContent>
+            </AppPage>
         </AppLayout>
     );
 };

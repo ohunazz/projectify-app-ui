@@ -6,13 +6,14 @@ import {
     Modal,
     Typography,
     Button,
-    Select,
     DatePickerV1,
+    Select,
     Option
 } from "../../../design-system";
 import { useStore } from "../../../hooks";
 import { Actions, AdminAddTeamMemberAction } from "../../../store";
-import { formatISO } from "date-fns";
+import { teamMemberService } from "../../../api";
+import { toIso8601 } from "../../../utils";
 
 type ModalProps = {
     show: boolean;
@@ -35,12 +36,12 @@ const Buttons = styled.div`
     gap: var(--space-10);
 `;
 
-const positions: Option[] = [
+export const positions: Option[] = [
     { value: "Frontend Engineer", label: "Frontend Engineer" },
     { value: "Backend Engineer", label: "Backend Engineer" },
     { value: "Fullstack Engineer", label: "Fullstack Engineer" },
-    { value: "Products Designer", label: "Products Designer" },
-    { value: "Product Managers", label: "Product Managers" },
+    { value: "Product Designer", label: "Product Designer" },
+    { value: "Product Manager", label: "Product Manager" },
     { value: "Frontend Engineer II", label: "Frontend Engineer II" },
     { value: "Frontend Engineer III", label: "Frontend Engineer III" },
     { value: "Senior Frontend Engineer", label: "Senior Frontend Engineer" },
@@ -56,8 +57,9 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [position, setPosition] = useState("");
+    const [position, setPosition] = useState<Option>();
     const [joinDate, setJoinDate] = useState<Date>();
+    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
     const { dispatch } = useStore();
 
@@ -76,6 +78,10 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
     const handleOnSelectPosition = (option: Option) => {
         setPosition(option);
     };
+
+    const isFormSubmittable =
+        firstName && lastName && email && position && joinDate;
+
     const resetFields = () => {
         setFirstName("");
         setLastName("");
@@ -89,7 +95,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
             firstName,
             lastName,
             email,
-            joinDate: formatISO(joinDate!),
+            joinDate: toIso8601(joinDate!),
             position: position?.value as string
         };
         try {
@@ -119,20 +125,32 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
             </ModalTitle>
             <Inputs>
                 <Input
+                    type="text"
                     placeholder="First Name"
                     value={firstName}
                     onChange={handleOnChangeFirstName}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
                 />
                 <Input
+                    type="text"
                     placeholder="Last Name"
                     value={lastName}
                     onChange={handleOnChangeLastName}
                     shape="rounded"
                     size="lg"
+                    disabled={isFormSubmitting}
                 />
-
+                <Input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleOnChangeEmail}
+                    shape="rounded"
+                    size="lg"
+                    disabled={isFormSubmitting}
+                />
                 <Select
                     options={positions}
                     onSelect={handleOnSelectPosition}
@@ -145,18 +163,9 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                 <DatePickerV1
                     inputSize="lg"
                     shape="rounded"
-                    placeholder="Join Date"
+                    placeholder="Joined Date"
                     selected={joinDate}
                     onChange={(date) => setJoinDate(date)}
-                />
-
-                <Input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={handleOnChangeEmail}
-                    shape="rounded"
-                    size="lg"
                 />
             </Inputs>
             <Buttons>
@@ -175,6 +184,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     shape="rounded"
                     color="primary"
                     fullWidth
+                    disabled={isFormSubmitting || !isFormSubmittable}
                     onClick={createTeamMember}
                 >
                     Save
