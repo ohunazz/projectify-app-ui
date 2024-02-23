@@ -58,8 +58,7 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [position, setPosition] = useState<Option>();
-    const [joinDate, setJoinDate] = useState<Date>();
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
+    const [joinDate, setJoinDate] = useState<Date | null>();
 
     const { dispatch } = useStore();
 
@@ -131,7 +130,6 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     onChange={handleOnChangeFirstName}
                     shape="rounded"
                     size="lg"
-                    disabled={isFormSubmitting}
                 />
                 <Input
                     type="text"
@@ -140,7 +138,6 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     onChange={handleOnChangeLastName}
                     shape="rounded"
                     size="lg"
-                    disabled={isFormSubmitting}
                 />
                 <Input
                     type="email"
@@ -149,7 +146,6 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     onChange={handleOnChangeEmail}
                     shape="rounded"
                     size="lg"
-                    disabled={isFormSubmitting}
                 />
                 <Select
                     options={positions}
@@ -184,7 +180,6 @@ const CreateTeamMemberModal: React.FC<ModalProps> = ({ show, closeModal }) => {
                     shape="rounded"
                     color="primary"
                     fullWidth
-                    disabled={isFormSubmitting || !isFormSubmittable}
                     onClick={createTeamMember}
                 >
                     Save

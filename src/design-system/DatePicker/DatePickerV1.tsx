@@ -1,8 +1,9 @@
 import React from "react";
-import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
-import { InputSize } from "../Input/types";
+import ReactDatePicker from "react-datepicker";
 import { trimWhiteSpaces } from "../utils";
 import getDate from "date-fns/getDate";
+import { Icon } from "../Icon";
+import { DatePickerProps } from "./types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePicker.css";
@@ -25,28 +26,18 @@ const shapeClassNames = {
     }
 };
 
-interface DataPickerProps {
-    selected: ReactDatePickerProps["selected"];
-    onSelect?: (value: Date) => void;
-    onChange: (value: Date) => void;
-    placeholder: string;
-    disabled?: boolean;
-    inputSize?: InputSize;
-    shape?: "rounded" | "circle";
-}
-
-const DatePickerV1: React.FC<DataPickerProps> = ({
+const DatePickerV1: React.FC<DatePickerProps> = ({
     selected,
     onSelect,
     onChange,
     placeholder,
     disabled,
     inputSize,
-    shape
+    shape,
+    selectsRange,
+    startDate,
+    endDate
 }) => {
-    const handleOnChange = (date: Date) => {
-        onChange(date);
-    };
     const handleOnSelect = (date: Date) => {
         onSelect && onSelect(date);
     };
@@ -78,13 +69,24 @@ const DatePickerV1: React.FC<DataPickerProps> = ({
         <ReactDatePicker
             selected={selected}
             onSelect={handleOnSelect}
-            onChange={handleOnChange}
+            onChange={onChange}
             className={finalInputClassNames}
             placeholderText={placeholder}
             disabled={disabled}
             dayClassName={customizeDay}
             renderDayContents={renderDayContents}
             calendarClassName={finalCalendarClassNames}
+            showIcon
+            selectsRange={selectsRange}
+            icon={
+                <Icon
+                    iconName="calendar"
+                    className="v1-date-picker__calendar-icon"
+                />
+            }
+            toggleCalendarOnIconClick
+            startDate={startDate}
+            endDate={endDate}
         />
     );
 };

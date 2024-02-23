@@ -39,7 +39,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({
     show,
     closeModal
 }) => {
-    const [taskDue, setTaskDue] = useState<Date>();
+    const [taskDue, setTaskDue] = useState<Date | null>();
     const [taskTitle, setTaskTitle] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
     const [isFormSubmitting, setIsFormSubmitting] = useState(false);
