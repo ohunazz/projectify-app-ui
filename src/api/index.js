@@ -5,3 +5,4 @@ export * from "./adminTeamMembers";
 
 export * from "./teamMember";
 export * from "./teamMemberPersonalTasks";
+export * from "./projects";
