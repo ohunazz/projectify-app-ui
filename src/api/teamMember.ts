@@ -5,28 +5,33 @@ import {
     TeamMemberUser
 } from "../types";
 
-export type GetMeResponseType = {
-    data: TeamMemberUser;
-};
-
 interface CreatePasswordInput {
+    email: string;
     password: string;
     passwordConfirm: string;
-    email: string;
 }
+
+export type TeamMemberChangePasswordInput = {
+    newPassword: string;
+    newPasswordConfirm: string;
+};
 
 type SignInInput = {
     email: string;
     password: string;
 };
 
+export type GetMeAPIResponse = {
+    data: TeamMemberUser;
+};
+
 type CreateInput = Omit<TeamMember, "id" | "status">;
 
-type CreateInputResponse = {
+type CreateAPIResponse = {
     data: TeamMember;
 };
 
-type GetAllTeamMembersResponse = {
+type GetAllAPIResponse = {
     data: TeamMember[];
 };
 
@@ -40,7 +45,7 @@ class TeamMemberService {
         }/team-members`;
     }
 
-    async create(input: CreateInput): Promise<CreateInputResponse> {
+    async create(input: CreateInput): Promise<CreateAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -63,51 +68,11 @@ class TeamMemberService {
         }
     }
 
-    async getAll(): Promise<GetAllTeamMembersResponse> {
+    async getAll(): Promise<GetAllAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
             const response = await fetch(`${this.url}/`, {
-                headers: {
-                    authorization: `Bearer ${authToken}`
-                }
-            });
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-
-            return response.json();
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async signIn(input: SignInInput): Promise<{ token: string }> {
-        try {
-            const response = await fetch(`${this.url}/login`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(input)
-            });
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.message);
-            }
-
-            return response.json();
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    async getMe(): Promise<GetMeResponseType> {
-        try {
-            const rawAuthToken = localStorage.getItem("authToken");
-            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
-            const response = await fetch(`${this.url}/me`, {
                 headers: {
                     authorization: `Bearer ${authToken}`
                 }
@@ -137,6 +102,95 @@ class TeamMemberService {
                 const data = await response.json();
                 throw new Error(data.message);
             }
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async signIn(input: SignInInput): Promise<{ token: string }> {
+        try {
+            const response = await fetch(`${this.url}/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(input)
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async forgotPassword(email: string) {
+        try {
+            const response = await fetch(`${this.url}/forgot-password`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email
+                })
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async resetPassword(
+        password: string,
+        passwordConfirm: string,
+        token: string
+    ) {
+        try {
+            const response = await fetch(`${this.url}/reset-password`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    password,
+                    passwordConfirm
+                })
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
+            return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async getMe(): Promise<GetMeAPIResponse> {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(`${this.url}/me`, {
+                headers: {
+                    authorization: `Bearer ${authToken}`
+                }
+            });
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+
             return response.json();
         } catch (error) {
             throw error;
@@ -203,6 +257,35 @@ class TeamMemberService {
                 body: JSON.stringify(updateData)
             });
 
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async changePasswordByAdmin(
+        teamMemberId: string,
+        input: TeamMemberChangePasswordInput
+    ) {
+        console.log(teamMemberId);
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+
+            const response = await fetch(
+                `${this.url}/${teamMemberId}/change-password`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify(input)
+                }
+            );
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.message);

@@ -1,14 +1,14 @@
 import { Task, TaskUpdate } from "../types";
 
-export type TaskCreateInput = Omit<Task, "id" | "status">;
+export type CreateInput = Omit<Task, "id" | "status">;
 
-interface GetAllTasksResponse {
+interface GetAllAPIResponse {
     data: {
         tasks: Task[];
     };
 }
 
-interface TaskCreateResponse {
+interface CreateAPIResponse {
     data: Task;
 }
 
@@ -22,7 +22,7 @@ class AdminPersonalTasks {
         }/admins/me`;
     }
 
-    async createTask(input: TaskCreateInput): Promise<TaskCreateResponse> {
+    async createTask(input: CreateInput): Promise<CreateAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -45,7 +45,7 @@ class AdminPersonalTasks {
         }
     }
 
-    async getTasks(): Promise<GetAllTasksResponse> {
+    async getTasks(): Promise<GetAllAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";

@@ -1,6 +1,10 @@
 import { Project } from "../types";
 
-type CreateProjectInput = Omit<Project, "id" | "status">;
+type CreateInput = Omit<Project, "id" | "status">;
+
+type CreateInputResponse = {
+    data: Project;
+};
 
 interface GetAllProjectsResponse {
     data: {
@@ -8,7 +12,7 @@ interface GetAllProjectsResponse {
     };
 }
 
-class AdminProjects {
+class AdminProjectsService {
     url: string;
     constructor() {
         this.url = `${
@@ -18,7 +22,7 @@ class AdminProjects {
         }/projects`;
     }
 
-    async create(input: CreateProjectInput) {
+    async create(input: CreateInput): Promise<CreateInputResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -61,4 +65,4 @@ class AdminProjects {
     }
 }
 
-export const adminProjects = new AdminProjects();
+export const adminProjectsService = new AdminProjectsService();
