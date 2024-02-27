@@ -11,10 +11,6 @@ export const userReducer = (
             return payload;
         }
 
-        case Actions.RESET_STATE: {
-            return null;
-        }
-
         default:
             return state;
     }

@@ -7,7 +7,6 @@ import {
     AdminAddTeamMemberAction,
     AdminRemoveTeamMemberAction,
     AdminUpdateTeamMemberAction,
-    AdminChanePasswordTeamMemberAction,
     AdminChangeTeamMemberStatusAction
 } from "../actions";
 
@@ -60,19 +59,6 @@ const adminTeamMembersReducer = produce(
                     teamMember.position = data.position || teamMember.position;
                     teamMember.joinDate = data.joinDate || teamMember.joinDate;
                 }
-                return draft;
-            }
-
-            case Actions.ADMIN_CHANGE_PASSWORD_TEAM_MEMBER: {
-                const payload =
-                    action.payload as AdminChanePasswordTeamMemberAction["payload"];
-
-                const teamMember = draft[payload.id];
-
-                if (teamMember) {
-                    teamMember.password = payload.password;
-                }
-
                 return draft;
             }
 

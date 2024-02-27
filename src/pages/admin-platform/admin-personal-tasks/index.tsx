@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NoDataPlaceholder, PageHeader } from "../../components";
 import { adminTasksService } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, PopulateTasksAction } from "../../../store";
+import { Actions, AdminPopulateTasksAction } from "../../../store";
 import { groupTasksByStatus } from "../../../utils";
 import { CreateTaskModal } from "./CreateTaskModal";
 import { Kanban } from "./Kanban";
@@ -24,7 +24,7 @@ const AdminTasksPage = () => {
             .getTasks()
             .then((data) => {
                 setIsTasksFetching(false);
-                const action: PopulateTasksAction = {
+                const action: AdminPopulateTasksAction = {
                     type: Actions.POPULATE_TASKS,
                     payload: data.data.tasks
                 };
