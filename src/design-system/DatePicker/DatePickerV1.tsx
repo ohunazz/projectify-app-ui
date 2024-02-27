@@ -1,7 +1,8 @@
 import React from "react";
+import getDate from "date-fns/getDate";
 import ReactDatePicker from "react-datepicker";
 import { trimWhiteSpaces } from "../utils";
-import getDate from "date-fns/getDate";
+
 import { Icon } from "../Icon";
 import { DatePickerProps } from "./types";
 
@@ -84,7 +85,6 @@ const DatePickerV1: React.FC<DatePickerProps> = ({
                     className="v1-date-picker__calendar-icon"
                 />
             }
-            toggleCalendarOnIconClick
             startDate={startDate}
             endDate={endDate}
         />

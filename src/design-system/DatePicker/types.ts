@@ -2,7 +2,7 @@ import { ReactDatePickerProps } from "react-datepicker";
 import { InputSize } from "../Input";
 
 interface BaseDataPickerProps {
-    selected: ReactDatePickerProps["selected"];
+    selected?: ReactDatePickerProps["selected"];
     onSelect?: (value: Date) => void;
     onChange: ReactDatePickerProps["onChange"];
     placeholder: string;
