@@ -1,20 +1,14 @@
-import { Task, TaskStatus } from "../types";
+import { Task, TaskUpdate } from "../types";
 
-type TaskCreateInput = Omit<Task, "id" | "status">;
-export type TaskUpdateInput = {
-    title?: string;
-    description?: string;
-    due?: Date;
-    status?: TaskStatus;
-};
+type CreateInput = Omit<Task, "id" | "status">;
 
-interface GetAllTasksResponse {
+interface GetAllAPIResponse {
     data: {
         tasks: Task[];
     };
 }
 
-interface TaskCreateResponse {
+interface CreateAPIResponse {
     data: Task;
 }
 
@@ -28,7 +22,7 @@ class TeamMemberTasksService {
         }/team-members/me`;
     }
 
-    async createTask(input: TaskCreateInput): Promise<TaskCreateResponse> {
+    async createTask(input: CreateInput): Promise<CreateAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -51,7 +45,7 @@ class TeamMemberTasksService {
         }
     }
 
-    async getTasks(): Promise<GetAllTasksResponse> {
+    async getTasks(): Promise<GetAllAPIResponse> {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
@@ -91,7 +85,7 @@ class TeamMemberTasksService {
         }
     }
 
-    async updateTask(taskId: string, input: TaskUpdateInput) {
+    async updateTask(taskId: string, input: TaskUpdate) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";

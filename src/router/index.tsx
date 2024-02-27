@@ -10,7 +10,7 @@ import {
     AdminForgetPassword,
     AdminResetPassword,
     AdminPlatform,
-    AdminProjects,
+    AdminProjectsPage,
     AdminTasksPage,
     AdminTeamMembersPage,
     TeamMemberCreatePassword,
@@ -74,7 +74,7 @@ export const router = createBrowserRouter(
                     />
                 }
             >
-                <Route path="projects" element={<AdminProjects />} />
+                <Route path="projects" element={<AdminProjectsPage />} />
 
                 <Route path="personal-tasks" element={<AdminTasksPage />} />
                 <Route path="team-members" element={<AdminTeamMembersPage />} />

@@ -12,7 +12,6 @@ import {
 import { useStore } from "../../../hooks";
 import { teamMemberService } from "../../../api";
 import { Actions, AdminUpdateTeamMemberAction } from "../../../store";
-import { ChangePasswordModal } from "./ChangePasswordModal";
 import { toDateObj, toIso8601 } from "../../../utils";
 
 type EditTeamMemberModalProps = {
@@ -154,22 +153,7 @@ const EditTeamMemberModal: React.FC<EditTeamMemberModalProps> = ({
                     onChange={(date) => setJoinDate(date)}
                 />
             </Inputs>
-            <ActionLink
-                onClick={() => handleOnClickUpdatePassword(teamMemberId)}
-            >
-                <Icon iconName="plus" className="plus-icon" />
-                <Typography
-                    variant="paragraphSM"
-                    className="update-password__link"
-                >
-                    Update Password
-                </Typography>
-                <ChangePasswordModal
-                    show={showChangePasswordModal}
-                    teamMemberId={selectedTeamMemberId}
-                    closeModal={() => setShowChangePasswordModal(false)}
-                />
-            </ActionLink>
+
             <Buttons>
                 <Button
                     color="secondary"

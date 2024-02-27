@@ -1,6 +1,6 @@
 import {
     AdminUser,
-    Project,
+    ProjectWithContributors,
     Task,
     TeamMember,
     TeamMemberUser
@@ -9,7 +9,7 @@ import {
 export type UserState = AdminUser | TeamMemberUser | null;
 export type TeamMemberState = { [teamMemberId: string]: TeamMember };
 export type TaskState = { [taskId: string]: Task };
-export type ProjectState = { [projectId: string]: Project };
+export type ProjectState = { [projectId: string]: ProjectWithContributors };
 
 export interface GlobalState {
     user: UserState;

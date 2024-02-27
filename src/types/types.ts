@@ -48,6 +48,7 @@ export enum AdminTeamMemberActions {
     reactivate = "reactivate",
     deactivate = "deactivate"
 }
+
 export type TeamMemberStatus = "ACTIVE" | "INACTIVE" | "DEACTIVATED";
 export type AdminTeamMemberStatusChange = "reactivate" | "deactivate";
 
@@ -59,6 +60,7 @@ export interface TeamMember {
     position: string;
     email: string;
     joinDate: string;
+    password?: string;
 }
 
 export interface TeamMemberUpdate {
@@ -66,4 +68,27 @@ export interface TeamMemberUpdate {
     lastName?: string;
     position?: string;
     joinDate?: string;
+}
+
+export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
+type ContributorStatus = "ACTIVE" | "INACTIVE";
+
+export interface ProjectContributor {
+    id: string;
+    firstName: string;
+    lastName: string;
+    joinedAt: string;
+    status: ContributorStatus;
+}
+export interface Project {
+    id: string;
+    name: string;
+    description: string;
+    status: ProjectStatus;
+    startDate: string;
+    endDate: string;
+}
+
+export interface ProjectWithContributors extends Project {
+    contributers?: ProjectContributor[];
 }
