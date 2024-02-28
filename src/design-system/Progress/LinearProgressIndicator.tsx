@@ -50,7 +50,7 @@ export const LinearProgressIndicator: React.FC<
             weight="medium"
             className="linear-progress__indicator-text"
         >
-            {value}%
+            {value || 0}%
         </Typography>
     );
 };

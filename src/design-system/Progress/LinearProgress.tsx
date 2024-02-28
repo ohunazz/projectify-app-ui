@@ -20,7 +20,7 @@ const LinearProgress: React.FC<LinearProgressProps> = ({
             <div className="linear-progress__max">
                 <div
                     className="linear-progress__progress"
-                    style={{ width: `${value}%` }}
+                    style={{ width: `${value || 0}%` }}
                 ></div>
             </div>
             <div className="linear-progress__progress-indicator">
