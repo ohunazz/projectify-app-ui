@@ -15,7 +15,7 @@ import {
 export enum Actions {
     INIT_USER = "INIT_USER",
     RESET_STATE = "RESET_STATE",
-    POPULATE_TASKS = "POPULATE_TASKS",
+    ADMIN_POPULATE_TASKS = "ADMIN_POPULATE_TASKS",
     ADMIN_ADD_TASK = "ADMIN_ADD_TASK",
     ADMIN_CHANGE_TASK_STATUS = "ADMIN_CHANGE_TASK_STATUS",
     ADMIN_UPDATE_TASK = "ADMIN_UPDATE_TASK",
@@ -43,7 +43,7 @@ export interface ResetStateAction {
 }
 
 export interface AdminPopulateTasksAction {
-    type: Actions.POPULATE_TASKS;
+    type: Actions.ADMIN_POPULATE_TASKS;
     payload: Task[];
 }
 

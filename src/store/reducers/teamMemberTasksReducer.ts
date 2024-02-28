@@ -14,7 +14,7 @@ import { Task } from "../../types";
 const teamMemberTasksReducer = produce(
     (draft: TaskState, action: ActionType): TaskState => {
         switch (action.type) {
-            case Actions.POPULATE_TASKS: {
+            case Actions.ADMIN_POPULATE_TASKS: {
                 const payload =
                     action.payload as AdminPopulateTasksAction["payload"];
                 return payload.reduce((acc: TaskState, task: Task) => {

@@ -1,30 +1,29 @@
-import format from "date-fns/format";
+import { useState } from "react";
 import styled from "styled-components";
+import format from "date-fns/format";
 import {
     Badge,
     BadgeColors,
     Menu,
     MenuOption,
-    Typography
-} from "../../../design-system";
-import {
+    Typography,
     Table,
     TableBody,
     TableBodyCell,
     TableHead,
     TableHeadCell,
     TableRow
-} from "../../../design-system/Table";
+} from "../../../design-system";
+
 import {
     TeamMember,
     AdminTeamMemberActions,
     AdminTeamMemberStatusChange
 } from "../../../types";
-import { useState } from "react";
 import { DeleteTeamMemberModal } from "./DeleteTeamMemberModal";
 import { ChangeTeamMemberStatusModal } from "./ChangeTeamMemberStatusModal";
 import { EditTeamMemberModal } from "./EditTeamMemberModal";
-import { parseISO } from "date-fns";
+import { formatAsMMMddYYYY } from "../../../utils";
 import { Scrollable } from "../../components";
 
 type TeamMembersTableProps = {
@@ -33,6 +32,10 @@ type TeamMembersTableProps = {
 
 const TableContainer = styled(Scrollable)`
     height: calc(100% - 13rem);
+`;
+
+const JoinedDate = styled(Typography)`
+    color: var(--blue-ribbon-600);
 `;
 
 const options: MenuOption[] = [
@@ -69,14 +72,12 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
     const [selectedTeamMemberId, setSelectedTeamMemberId] = useState("");
     const [showDeleteTeamMemberModal, setShowDeleteTeamMemberModal] =
         useState(false);
-
     const [changeStatus, setChangeStatus] =
         useState<AdminTeamMemberStatusChange>();
     const [
         showChangeTeamMemberStatusModal,
         setShowChangeTeamMemberStatusModal
     ] = useState(false);
-
     const [showEditTeamMemberModal, setShowEditTeamMemberModal] =
         useState(false);
 
@@ -149,15 +150,12 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                                     </Typography>
                                 </TableBodyCell>
                                 <TableBodyCell>
-                                    <Typography
+                                    <JoinedDate
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
-                                        {format(
-                                            parseISO(teamMember.joinDate),
-                                            "MMM d, yyyy"
-                                        )}
-                                    </Typography>
+                                        {formatAsMMMddYYYY(teamMember.joinDate)}
+                                    </JoinedDate>
                                 </TableBodyCell>
                                 <TableBodyCell>
                                     <Badge
@@ -201,7 +199,6 @@ const TeamMembersTable: React.FC<TeamMembersTableProps> = ({ data }) => {
                 closeModal={() => setShowChangeTeamMemberStatusModal(false)}
                 changeStatus={changeStatus!}
             />
-
             <EditTeamMemberModal
                 show={showEditTeamMemberModal}
                 teamMemberId={selectedTeamMemberId}

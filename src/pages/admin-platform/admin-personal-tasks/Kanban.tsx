@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import toast from "react-hot-toast";
 import { GroupedTasks } from "../../../utils";
 import { useStore } from "../../../hooks";
@@ -25,13 +25,6 @@ enum StatusToColumnTitleColor {
     TODO = "var(--jaguar-500)",
     INPROGRESS = "var(--sunglow-700)",
     DONE = "var(--green-500)"
-}
-
-enum StatusToColumnBackground {
-    TODO = "gray",
-    INPROGRESS = "orange",
-    DONE = "green",
-    BLOCKED = "red"
 }
 
 const TasksColumns = styled.div`

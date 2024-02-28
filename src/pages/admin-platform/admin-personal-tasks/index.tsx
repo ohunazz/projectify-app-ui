@@ -25,7 +25,7 @@ const AdminTasksPage = () => {
             .then((data) => {
                 setIsTasksFetching(false);
                 const action: AdminPopulateTasksAction = {
-                    type: Actions.POPULATE_TASKS,
+                    type: Actions.ADMIN_POPULATE_TASKS,
                     payload: data.data.tasks
                 };
                 dispatch(action);

@@ -19,3 +19,4 @@ export * from "./Menu";
 export * from "./Bar";
 export * from "./utils";
 export * from "./Table";
+export * from "./Progress";

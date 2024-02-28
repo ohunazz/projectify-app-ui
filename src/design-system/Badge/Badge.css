@@ -1,12 +1,11 @@
 .badge {
     height: 2.8rem;
-    padding: 0 var(--space-12);
-
     width: max-content;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: calc(var(--space-2) + var(--space-4));
+    padding: 0 var(--space-12);
 }
 
 .badge-rounded {
