@@ -1,6 +1,6 @@
 import { Project, ProjectWithContributors } from "../types";
 
-type CreateInput = Omit<Project, "id" | "status">;
+type CreateInput = Omit<Project, "id" | "status" | "progress">;
 
 type CreateAPIResponse = {
     data: Project;

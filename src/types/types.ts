@@ -85,6 +85,7 @@ export interface Project {
     name: string;
     description: string;
     status: ProjectStatus;
+    progress: number;
     startDate: string;
     endDate: string;
 }
