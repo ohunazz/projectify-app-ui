@@ -1,5 +1,6 @@
 import {
     Project,
+    ProjectStatus,
     ProjectStatusChange,
     ProjectWithContributors
 } from "../types";
@@ -66,17 +67,19 @@ class ProjectService {
         }
     }
 
-    async changeStatus(projectId: string, changeStatus: ProjectStatusChange) {
+    async changeStatus(projectId: string, status: ProjectStatus) {
         try {
             const rawAuthToken = localStorage.getItem("authToken");
             const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
             const response = await fetch(
-                `${this.url}/${projectId}/${changeStatus}`,
+                `${this.url}/${projectId}/change-status`,
                 {
                     method: "PATCH",
                     headers: {
-                        authorization: `Bearer ${authToken}`
-                    }
+                        authorization: `Bearer ${authToken}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ status })
                 }
             );
 
