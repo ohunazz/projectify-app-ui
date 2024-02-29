@@ -14,40 +14,13 @@ import {
     LinearProgress
 } from "../../../design-system";
 import { Scrollable } from "../../components";
-import { ProjectWithContributors } from "../../../types";
+import { ProjectActions, ProjectWithContributors } from "../../../types";
 import { formatAsMMMddYYYY, formatDeadline } from "../../../utils";
-
-const TableContainer = styled(Scrollable)`
-    height: calc(100% - 13rem);
-`;
+import { useState } from "react";
 
 type ProjectsTableProps = {
     data: ProjectWithContributors[];
 };
-
-const ProjectDescription = styled(Typography)`
-    color: var(--jaguar-500);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-`;
-
-const AboutProject = styled.div`
-    width: 90%;
-`;
-
-const ProgressWrapper = styled.div`
-    width: 80%;
-`;
-
-const Deadline = styled(Typography)`
-    &.green {
-        color: var(--green-600);
-    }
-    &.red {
-        color: var(--red-orange-600);
-    }
-`;
 
 const renderDeadline = (isoDate: string) => {
     const formattedDeadline = formatDeadline(isoDate);
@@ -65,6 +38,41 @@ const renderDeadline = (isoDate: string) => {
     );
 };
 
+const options: MenuOption[] = [
+    { label: "Edit", iconName: "edit", value: "edit", color: "primary" },
+    {
+        label: "Reactivate",
+        iconName: "play-in-circle",
+        value: "reactivate",
+        color: "primary"
+    },
+    {
+        label: "Complete",
+        iconName: "check-in-circle",
+        value: "complete",
+        color: "primary"
+    },
+    {
+        label: "Archive",
+        iconName: "archive",
+        value: "archive",
+        color: "danger"
+    },
+    {
+        label: "Put On Hold",
+        iconName: "pause-in-circle",
+        value: "onhold",
+        color: "danger"
+    }
+];
+
+const allowedActions = {
+    ACTIVE: [options[0], options[2], options[3], options[4]],
+    ARCHIVED: [options[0], options[1], options[2], options[4]],
+    ONHOLD: [options[0], options[1], options[2], options[3]],
+    COMPLETED: [options[0], options[1], options[3], options[4]]
+};
+
 const columns = ["20%", "10%", "20%", "15%", "15%", "10%", "10%"];
 enum StatusToBadgeColors {
     ACTIVE = "violet",
@@ -73,7 +81,40 @@ enum StatusToBadgeColors {
     ONHOLD = "red"
 }
 
+const TableContainer = styled(Scrollable)`
+    height: calc(100% - 13rem);
+`;
+
+const ProjectDescription = styled(Typography)`
+    color: var(--jaguar-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+`;
+const AboutProject = styled.div`
+    width: 90%;
+`;
+const ProgressWrapper = styled.div`
+    width: 80%;
+`;
+const Deadline = styled(Typography)`
+    &.green {
+        color: var(--green-600);
+    }
+    &.red {
+        color: var(--red-orange-600);
+    }
+`;
+
 const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
+    const [selectedProjectId, setSelectedProjectId] = useState("");
+
+    const handleOnSelectCellMenu = (
+        projectId: string,
+        value: ProjectActions
+    ) => {
+        setSelectedProjectId(projectId);
+    };
     return (
         <TableContainer>
             <Table>
@@ -90,6 +131,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                 </TableHead>
                 <TableBody>
                     {data.map((project) => {
+                        console.log(project);
                         return (
                             <TableRow key={project.id} columns={columns}>
                                 <TableBodyCell>
@@ -132,7 +174,7 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                         variant="paragraphSM"
                                         weight="medium"
                                     >
-                                        {renderDeadline(project.endDate)}
+                                        {formatAsMMMddYYYY(project.startDate)}
                                     </Typography>
                                 </TableBodyCell>
                                 <TableBodyCell>
@@ -153,8 +195,13 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
                                 </TableBodyCell>
                                 <TableBodyCell>
                                     <Menu
-                                        options={[]}
-                                        onSelect={(value) => console.log(value)}
+                                        options={allowedActions[project.status]}
+                                        onSelect={(value) =>
+                                            handleOnSelectCellMenu(
+                                                project.id,
+                                                value as ProjectActions
+                                            )
+                                        }
                                     />
                                 </TableBodyCell>
                             </TableRow>
@@ -165,5 +212,4 @@ const ProjectsTable: React.FC<ProjectsTableProps> = ({ data }) => {
         </TableContainer>
     );
 };
-
 export { ProjectsTable };

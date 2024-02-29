@@ -17,13 +17,15 @@ export type IconName =
     | "check-sharp"
     | "minus-sharp"
     | "minus"
+    | "archive"
     | "info-in-circle-filled"
     | "check-in-circle-filled"
     | "info-in-circle-sharp-filled"
     | "check-in-circle-sharp-filled"
     | "check-in-circle"
     | "x-in-circle"
-    | "plus";
+    | "pause-in-circle"
+    | "play-in-circle";
 
 export type IconProps = {
     iconName: IconName;

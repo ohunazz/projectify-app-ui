@@ -1,4 +1,8 @@
-import { Project, ProjectWithContributors } from "../types";
+import {
+    Project,
+    ProjectStatusChange,
+    ProjectWithContributors
+} from "../types";
 
 type CreateInput = Omit<Project, "id" | "status" | "progress">;
 
@@ -57,6 +61,29 @@ class ProjectService {
             }
 
             return response.json();
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    async changeStatus(projectId: string, changeStatus: ProjectStatusChange) {
+        try {
+            const rawAuthToken = localStorage.getItem("authToken");
+            const authToken = rawAuthToken ? JSON.parse(rawAuthToken) : "";
+            const response = await fetch(
+                `${this.url}/${projectId}/${changeStatus}`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        authorization: `Bearer ${authToken}`
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.message);
+            }
         } catch (error) {
             throw error;
         }
