@@ -11,6 +11,7 @@ import { ProjectsFilters } from "./ProjectsFilters";
 import { ProjectStatus } from "../../../types";
 import noProject from "../../../assets/illustrations/no-project.svg";
 import { ProjectsTable } from "./ProjectsTable";
+import { EditProjectModal } from "./EditProjectModal";
 
 const AdminProjectsPage = () => {
     const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);

@@ -99,3 +99,10 @@ export interface Project {
 export interface ProjectWithContributors extends Project {
     contributers?: ProjectContributor[];
 }
+
+export interface ProjectUpdate {
+    name?: string;
+    description?: string;
+    startDate?: string;
+    endDate?: string;
+}
