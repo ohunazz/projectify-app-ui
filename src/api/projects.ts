@@ -103,7 +103,7 @@ class ProjectService {
                     authorization: `Bearer ${authToken}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ input })
+                body: JSON.stringify(input)
             });
 
             if (!response.ok) {

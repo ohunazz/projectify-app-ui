@@ -78,15 +78,7 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
         setEndDate(date);
     };
 
-    const clearFields = () => {
-        setName("");
-        setDescription("");
-        setStartDate(null);
-        setEndDate(null);
-    };
-
     const cancel = () => {
-        clearFields();
         closeModal();
     };
 
@@ -114,7 +106,6 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
                     }
                 };
                 dispatch(action);
-                clearFields();
                 closeModal();
                 toast.success("Project has been successfully updated"!);
             })
