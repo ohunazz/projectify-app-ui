@@ -10,6 +10,7 @@ type ProjectsFiltersProps = {
 };
 
 const statusOptions = [
+    { label: "All", value: "all" },
     { label: "Active", value: "ACTIVE" },
     { label: "Completed", value: "COMPLETED" },
     { label: "Archived", value: "ARCHIVED" },
