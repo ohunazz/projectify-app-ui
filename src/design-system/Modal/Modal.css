@@ -14,12 +14,15 @@
 }
 
 .modal {
-    min-width: 37rem;
-    padding: var(--space-24);
     background-color: var(--white);
-    border-radius: var(--border-radius-32);
     box-shadow: var(--shadow-3xl);
     transition: all 0.5s;
+}
+
+.modal-overlay--center .modal {
+    min-width: 37rem;
+    padding: var(--space-24);
+    border-radius: var(--border-radius-16);
 }
 
 .modal-overlay--right {
