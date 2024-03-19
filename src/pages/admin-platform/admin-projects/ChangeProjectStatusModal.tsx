@@ -18,13 +18,15 @@ const generateMessages = (status: ProjectStatus) => {
         success: ""
     };
 
-    let actionVerb: string = status;
-    if (status === "ONHOLD") {
-        actionVerb = "PAUSE";
-    }
+    const statusToVerb = {
+        ONHOLD: "paused",
+        ARCHIVED: "archieved",
+        ACTIVE: "actived",
+        COMPLETED: "completed"
+    };
 
-    messages.confirmation = `Are you sure you want to ${actionVerb} the project?`;
-    messages.success = `Project has been successfully ${actionVerb}d`;
+    messages.confirmation = `Are you sure you want to change the project status to ${status}`;
+    messages.success = `Project has been successfully ${statusToVerb[status]} `;
     return messages;
 };
 
