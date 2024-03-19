@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-
-import { NoDataPlaceholder, PageHeader } from "../../components";
 import toast from "react-hot-toast";
+import { NoDataPlaceholder, PageHeader } from "../../components";
 import { Option } from "../../../design-system";
 import { useStore } from "../../../hooks";
 import { projectService } from "../../../api";
