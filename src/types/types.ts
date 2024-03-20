@@ -83,8 +83,14 @@ export interface ProjectContributor {
     id: string;
     firstName: string;
     lastName: string;
-    joinedAt: string;
-    status: ContributorStatus;
+    position: string;
+    joinedAt?: string;
+    status?: ContributorStatus;
+}
+
+export interface ProjectContributors {
+    assignedContributors: ProjectContributor[];
+    notAssignedContributors: Omit<ProjectContributor, "joinedAt" | "status">[];
 }
 export interface Project {
     id: string;
@@ -97,7 +103,8 @@ export interface Project {
 }
 
 export interface ProjectWithContributors extends Project {
-    contributers?: ProjectContributor[];
+    numberOfContributors: number;
+    contributors?: ProjectContributors;
 }
 
 export interface ProjectUpdate {

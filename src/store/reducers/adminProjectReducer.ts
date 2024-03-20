@@ -7,7 +7,7 @@ const adminProjectsReducer = produce(
         switch (action.type) {
             case Actions.ADD_PROJECT: {
                 const payload = action.payload as AddProjectAction["payload"];
-                draft[payload.id] = payload;
+                draft[payload.id] = { ...payload, numberOfContributors: 0 };
                 return draft;
             }
 
