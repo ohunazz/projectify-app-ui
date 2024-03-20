@@ -80,7 +80,7 @@ const AdminProjectsPage = () => {
                         selectedStatus={statusFilter}
                         setSelectedStatus={handleSetStatusFilter}
                     />
-                    <ProjectsTable data={filterProjects} />
+                    <ProjectsTable data={filteredProjects} />
                 </>
             )}
             <CreateProjectModal
