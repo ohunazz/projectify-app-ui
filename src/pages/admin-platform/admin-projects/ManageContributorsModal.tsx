@@ -4,6 +4,7 @@ import { projectService } from "../../../api";
 import { useStore } from "../../../hooks";
 import { Actions, PopulateProjectContributorsAction } from "../../../store";
 import toast from "react-hot-toast";
+import { AssignedContributors } from "./AssignedContributors";
 
 type Props = {
     projectId: string;
@@ -19,7 +20,7 @@ const ManageContributorsModal: React.FC<Props> = ({
     const { state, dispatch } = useStore();
 
     useEffect(() => {
-        if (projectId) {
+        if (projectId && show) {
             projectService
                 .getContributors(projectId)
                 .then(({ data }) => {
@@ -37,10 +38,17 @@ const ManageContributorsModal: React.FC<Props> = ({
                     toast.error(err.message);
                 });
         }
-    }, [projectId]);
+    }, [projectId, show]);
+    if (!projectId) return null;
     return (
         <Modal show={show} position="right">
-            Hi
+            <AssignedContributors
+                projectId={projectId}
+                closeModal={closeModal}
+                contributors={
+                    state.projects[projectId].contributors?.assignedContributors
+                }
+            />
         </Modal>
     );
 };
