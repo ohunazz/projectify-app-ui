@@ -1,5 +1,6 @@
 import {
     AdminUser,
+    ContributorStatus,
     Project,
     ProjectContributors,
     ProjectWithContributors,
@@ -34,7 +35,7 @@ export enum Actions {
     ADMIN_POPULATE_PROJECTS = "ADMIN_POPULATE_PROJECTS",
     ADMIN_CHANGE_PROJECT_STATUS = "ADMIN_CHANGE_PROJECT_STATUS",
     ADMIN_UPDATE_PROJECT = "ADMIN_UPDATE_PROJECT",
-    ADMIN_UPDATE_PROJECT_CONTRIBUTORS_NUMBER = "ADMIN_UPDATE_PROJECT_CONTRIBUTORS_NUMBER",
+    ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS = "ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS",
     ADMIN_POPULATE_PROJECT_CONTRIBUTORS = "ADMIN_POPULATE_PROJECT_CONTRIBUTORS"
 }
 
@@ -136,20 +137,18 @@ export type AdminUpdateProjectAction = {
     };
 };
 
-export type AdminUpdateProjectContributorsNumberAction = {
-    type: Actions.ADMIN_UPDATE_PROJECT_CONTRIBUTORS_NUMBER;
-    payload: {
-        id: string;
-        data: {
-            operation: "ADD" | "SUBTRACT";
-            quantity: number;
-        };
-    };
-};
-
 export type AdminPopulateProjectContributorsAction = {
     type: Actions.ADMIN_POPULATE_PROJECT_CONTRIBUTORS;
     payload: { id: string; data: ProjectContributors };
+};
+
+export type AdminUpdateProjectContributorStatus = {
+    type: Actions.ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS;
+    payload: {
+        id: string;
+        status: ContributorStatus;
+        teamMemberId: string;
+    };
 };
 
 export type ActionType =
@@ -170,4 +169,4 @@ export type ActionType =
     | AdminChangeProjectStatusAction
     | AdminUpdateProjectAction
     | AdminPopulateProjectContributorsAction
-    | AdminUpdateProjectContributorsNumberAction;
+    | AdminUpdateProjectContributorStatus;

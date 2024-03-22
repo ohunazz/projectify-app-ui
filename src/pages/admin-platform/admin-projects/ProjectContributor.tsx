@@ -17,17 +17,19 @@ type ProjectContributorProps = {
     layout: ProjectContributorLayout;
 };
 
-const ProjectContributorBase = styled.div<{ layout: ProjectContributorLayout }>`
+const ProjectContributorBase = styled.div<{
+    $layout: ProjectContributorLayout;
+}>`
     display: flex;
 
     ${(props) =>
-        props.layout === "sideBySide" &&
+        props.$layout === "sideBySide" &&
         css`
             align-items: center;
             gap: var(--space-12);
         `}
     ${(props) =>
-        props.layout === "stack" &&
+        props.$layout === "stack" &&
         css`
             flex-direction: column;
             gap: var(--space-8);
@@ -43,7 +45,7 @@ const ProjectContributor: React.FC<ProjectContributorProps> = ({
     layout
 }) => {
     return (
-        <ProjectContributorBase layout={layout}>
+        <ProjectContributorBase $layout={layout}>
             <Avatar
                 firstName={details.firstName}
                 lastName={details.lastName}

@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import { ProjectContributor as ProjectContributorType } from "../../../types";
+import {
+    ContributorStatus,
+    ProjectContributor as ProjectContributorType
+} from "../../../types";
 import {
     Badge,
     BadgeColors,
@@ -11,6 +14,11 @@ import {
 import { Scrollable } from "../../components";
 import { ProjectContributor } from "./ProjectContributor";
 import { formatAsMMMddYYYY } from "../../../utils";
+import { projectService } from "../../../api";
+import { useStore } from "../../../hooks";
+import { Actions, AdminUpdateProjectContributorStatus } from "../../../store";
+import toast from "react-hot-toast";
+
 type Props = {
     contributors: ProjectContributorType[] | undefined;
     projectId: string;
@@ -25,6 +33,7 @@ const Header = styled.div`
     border-bottom: 1px solid var(--jaguar-100);
     svg {
         fill: var(--red-orange-500);
+        cursor: pointer;
     }
 `;
 const ContributorBase = styled.div`
@@ -34,14 +43,7 @@ const ContributorBase = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-const StatusToSwitchState = {
-    ACTIVE: true,
-    INACTIVE: false
-};
-const StatusToBadgeColor = {
-    ACTIVE: "green",
-    INACTIVE: "red"
-};
+
 const SwitchWrapper = styled.div`
     height: 4rem;
     display: flex;
@@ -69,11 +71,49 @@ const Contributors = styled(Scrollable)`
     height: calc(100% - 6rem - 7.2rem);
 `;
 
+const StatusToSwitchState = {
+    ACTIVE: true,
+    INACTIVE: false
+};
+
+const SwitchStateToStatus = {
+    true: "ACTIVE",
+    false: "INACTIVE"
+};
+
+const StatusToBadgeColor = {
+    ACTIVE: "green",
+    INACTIVE: "red"
+};
+
 const AssignedContributors: React.FC<Props> = ({
     projectId,
     contributors,
     closeModal
 }) => {
+    const { dispatch } = useStore();
+
+    const changeStatus = (value: boolean, teamMemberId: string) => {
+        console.log(value);
+        const status = SwitchStateToStatus[`${value}`] as ContributorStatus;
+        projectService
+            .changeContributorStatus(projectId, teamMemberId, status)
+            .then((_) => {
+                const action: AdminUpdateProjectContributorStatus = {
+                    type: Actions.ADMIN_UPDATE_PROJECT_CONTRIBUTOR_STATUS,
+                    payload: {
+                        teamMemberId,
+                        status,
+                        id: projectId
+                    }
+                };
+                dispatch(action);
+            })
+            .catch((e) => {
+                const err = e as Error;
+                toast.error(err.message);
+            });
+    };
     return (
         <>
             <Header>
@@ -101,7 +141,12 @@ const AssignedContributors: React.FC<Props> = ({
                                             }
                                             id={contributor.id}
                                             shape="circle"
-                                            onSwitch={(value) => {}}
+                                            onSwitch={(value) =>
+                                                changeStatus(
+                                                    value,
+                                                    contributor.id
+                                                )
+                                            }
                                         />
                                     </SwitchWrapper>
                                     <Badge

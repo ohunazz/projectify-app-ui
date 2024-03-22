@@ -77,7 +77,7 @@ export interface TeamMemberUpdate {
 }
 
 export type ProjectStatus = "ACTIVE" | "ONHOLD" | "ARCHIVED" | "COMPLETED";
-type ContributorStatus = "ACTIVE" | "INACTIVE";
+export type ContributorStatus = "ACTIVE" | "INACTIVE";
 
 export interface ProjectContributor {
     id: string;
