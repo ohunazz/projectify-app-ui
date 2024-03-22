@@ -2,55 +2,66 @@ import React from "react";
 import { trimWhiteSpaces } from "../utils";
 import "./Switch.css";
 import { Icon } from "../Icon";
-
+import { Label } from "../Label";
 const shapeClassNames = {
     rounded: "switch-rounded",
     circle: "switch-circle"
 };
-
 type SwitchShape = "rounded" | "circle";
 interface ToggleProps {
     checked: boolean;
+    disabled?: boolean;
     className?: string;
     shape?: SwitchShape;
     onSwitch: (value: boolean) => void;
+    label?: string;
+    id: string;
+    position?: "end";
 }
-
 const Switch: React.FC<ToggleProps> = ({
     checked,
     onSwitch,
+    disabled,
     shape,
-    className
+    className,
+    id,
+    label,
+    position
 }) => {
+    console.log(checked);
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onSwitch(e.target.checked);
     };
-
     const shapeClassName = shape ? shapeClassNames[shape] : "";
-
     const trackClassNames = trimWhiteSpaces(
         `switch__track ${shapeClassName} ${checked ? "switch-on" : ""} 
-        }${className ? className : ""}`
+        ${className ? className : ""}`
     );
-
+    const labelClassName = `switch__label ${
+        position ? "switch__label--end" : ""
+    }`;
     return (
-        <label className={trackClassNames} htmlFor="switch">
+        <Label htmlFor={id} className={labelClassName} disabled={disabled}>
             <input
                 type="checkbox"
                 className="switch__hidden-input"
                 onChange={handleOnChange}
-                id={"switch"}
+                id={id}
+                disabled={disabled}
+                checked={checked}
             />
-            <div className="switch__thumb">
-                {checked && (
-                    <Icon
-                        iconName={!shape ? "check-sharp" : "check"}
-                        className="switch__icon"
-                    />
-                )}
+            <div className={trackClassNames}>
+                <div className="switch__thumb">
+                    {checked && (
+                        <Icon
+                            iconName={!shape ? "check-sharp" : "check"}
+                            className="switch__icon"
+                        />
+                    )}
+                </div>
             </div>
-        </label>
+            {label && <span>{label}</span>}
+        </Label>
     );
 };
-
 export { Switch };
