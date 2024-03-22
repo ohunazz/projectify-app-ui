@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { projectService } from "../../../api";
 import { toDateObj, toIso8601 } from "../../../utils";
 import { useStore } from "../../../hooks";
-import { Actions, UpdateProjectAction } from "../../../store";
+import { Actions, AdminUpdateProjectAction } from "../../../store";
 import { ProjectUpdate } from "../../../types";
 
 type EditProjectModalProps = {
@@ -103,8 +103,8 @@ const EditProjectModal: React.FC<EditProjectModalProps> = ({
         projectService
             .update(projectId, input)
             .then((_) => {
-                const action: UpdateProjectAction = {
-                    type: Actions.UPDATE_PROJECT,
+                const action: AdminUpdateProjectAction = {
+                    type: Actions.ADMIN_UPDATE_PROJECT,
                     payload: {
                         id: projectId,
                         data: input

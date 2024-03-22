@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import { Modal } from "../../../design-system";
 import { projectService } from "../../../api";
 import { useStore } from "../../../hooks";
-import { Actions, PopulateProjectContributorsAction } from "../../../store";
+import {
+    Actions,
+    AdminPopulateProjectContributorsAction
+} from "../../../store";
 import toast from "react-hot-toast";
 import { AssignedContributors } from "./AssignedContributors";
 
@@ -24,8 +27,8 @@ const ManageContributorsModal: React.FC<Props> = ({
             projectService
                 .getContributors(projectId)
                 .then(({ data }) => {
-                    const action: PopulateProjectContributorsAction = {
-                        type: Actions.POPULATE_PROJECT_CONTRIBUTORS,
+                    const action: AdminPopulateProjectContributorsAction = {
+                        type: Actions.ADMIN_POPULATE_PROJECT_CONTRIBUTORS,
                         payload: {
                             id: projectId,
                             data: data

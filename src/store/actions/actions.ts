@@ -30,12 +30,12 @@ export enum Actions {
     ADMIN_UPDATE_TEAM_MEMBER = "ADMIN_UPDATE_TEAM_MEMBER",
     ADMIN_CHANGE_PASSWORD_TEAM_MEMBER = "ADMIN_CHANGE_PASSWORD_TEAM_MEMBER",
 
-    ADD_PROJECT = "ADMIN_ADD_PROJECT",
-    POPULATE_PROJECTS = "POPULATE_PROJECTS",
-    CHANGE_PROJECT_STATUS = "CHANGE_PROJECT_STATUS",
-    UPDATE_PROJECT = "UPDATE_PROJECT",
-    UPDATE_PROJECT_CONTRIBUTORS_NUMBER = "UPDATE_PROJECT_CONTRIBUTORS_NUMBER",
-    POPULATE_PROJECT_CONTRIBUTORS = "POPULATE_PROJECT_CONTRIBUTORS"
+    ADMIN_ADD_PROJECT = "ADMIN_ADD_PROJECT",
+    ADMIN_POPULATE_PROJECTS = "ADMIN_POPULATE_PROJECTS",
+    ADMIN_CHANGE_PROJECT_STATUS = "ADMIN_CHANGE_PROJECT_STATUS",
+    ADMIN_UPDATE_PROJECT = "ADMIN_UPDATE_PROJECT",
+    ADMIN_UPDATE_PROJECT_CONTRIBUTORS_NUMBER = "ADMIN_UPDATE_PROJECT_CONTRIBUTORS_NUMBER",
+    ADMIN_POPULATE_PROJECT_CONTRIBUTORS = "ADMIN_POPULATE_PROJECT_CONTRIBUTORS"
 }
 
 export interface InitUserAction {
@@ -114,30 +114,30 @@ export type AdminUpdateTeamMemberAction = {
 };
 
 export type AddProjectAction = {
-    type: Actions.ADD_PROJECT;
+    type: Actions.ADMIN_ADD_PROJECT;
     payload: Project;
 };
 
-export type PopulateProjectsAction = {
-    type: Actions.POPULATE_PROJECTS;
+export type AdminPopulateProjectsAction = {
+    type: Actions.ADMIN_POPULATE_PROJECTS;
     payload: ProjectWithContributors[];
 };
 
-export type ChangeProjectStatusAction = {
-    type: Actions.CHANGE_PROJECT_STATUS;
+export type AdminChangeProjectStatusAction = {
+    type: Actions.ADMIN_CHANGE_PROJECT_STATUS;
     payload: { id: string; status: ProjectStatus };
 };
 
-export type UpdateProjectAction = {
-    type: Actions.UPDATE_PROJECT;
+export type AdminUpdateProjectAction = {
+    type: Actions.ADMIN_UPDATE_PROJECT;
     payload: {
         id: string;
         data: ProjectUpdate;
     };
 };
 
-export type UpdateProjectContributorsNumberAction = {
-    type: Actions.UPDATE_PROJECT_CONTRIBUTORS_NUMBER;
+export type AdminUpdateProjectContributorsNumberAction = {
+    type: Actions.ADMIN_UPDATE_PROJECT_CONTRIBUTORS_NUMBER;
     payload: {
         id: string;
         data: {
@@ -147,8 +147,8 @@ export type UpdateProjectContributorsNumberAction = {
     };
 };
 
-export type PopulateProjectContributorsAction = {
-    type: Actions.POPULATE_PROJECT_CONTRIBUTORS;
+export type AdminPopulateProjectContributorsAction = {
+    type: Actions.ADMIN_POPULATE_PROJECT_CONTRIBUTORS;
     payload: { id: string; data: ProjectContributors };
 };
 
@@ -166,8 +166,8 @@ export type ActionType =
     | AdminChangeTeamMemberStatusAction
     | AdminUpdateTeamMemberAction
     | AddProjectAction
-    | PopulateProjectsAction
-    | ChangeProjectStatusAction
-    | UpdateProjectAction
-    | PopulateProjectContributorsAction
-    | UpdateProjectContributorsNumberAction;
+    | AdminPopulateProjectsAction
+    | AdminChangeProjectStatusAction
+    | AdminUpdateProjectAction
+    | AdminPopulateProjectContributorsAction
+    | AdminUpdateProjectContributorsNumberAction;

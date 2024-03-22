@@ -77,7 +77,7 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                 .create(input)
                 .then((data) => {
                     const action: AddProjectAction = {
-                        type: Actions.ADD_PROJECT,
+                        type: Actions.ADMIN_ADD_PROJECT,
                         payload: data.data
                     };
                     dispatch(action);

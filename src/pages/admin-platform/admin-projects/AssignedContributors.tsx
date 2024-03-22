@@ -3,6 +3,7 @@ import { ProjectContributor as ProjectContributorType } from "../../../types";
 import {
     Badge,
     BadgeColors,
+    Button,
     Icon,
     Switch,
     Typography
@@ -10,13 +11,11 @@ import {
 import { Scrollable } from "../../components";
 import { ProjectContributor } from "./ProjectContributor";
 import { formatAsMMMddYYYY } from "../../../utils";
-
 type Props = {
     contributors: ProjectContributorType[] | undefined;
     projectId: string;
     closeModal: () => void;
 };
-
 const Header = styled.div`
     height: 6rem;
     padding: 0 var(--space-16);
@@ -28,7 +27,6 @@ const Header = styled.div`
         fill: var(--red-orange-500);
     }
 `;
-
 const ContributorBase = styled.div`
     height: 12.2rem;
     padding: var(--space-16);
@@ -36,32 +34,41 @@ const ContributorBase = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-
 const StatusToSwitchState = {
     ACTIVE: true,
     INACTIVE: false
 };
-
 const StatusToBadgeColor = {
     ACTIVE: "green",
     INACTIVE: "red"
 };
-
 const SwitchWrapper = styled.div`
     height: 4rem;
     display: flex;
     align-items: center;
 `;
-
 const ContributorControl = styled.div`
     display: flex;
     flex-direction: column;
     align-items: end;
 `;
-
 const JoinedAt = styled(Typography)`
     color: var(--jaguar-500);
 `;
+
+const AddButtonWrapper = styled.div`
+    height: 7.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    bottom: 0;
+`;
+
+const Contributors = styled(Scrollable)`
+    height: calc(100% - 6rem - 7.2rem);
+`;
+
 const AssignedContributors: React.FC<Props> = ({
     projectId,
     contributors,
@@ -75,7 +82,7 @@ const AssignedContributors: React.FC<Props> = ({
                 </Typography>
                 <Icon iconName="x" onClick={closeModal} />
             </Header>
-            <Scrollable>
+            <Contributors>
                 {contributors &&
                     contributors.map((contributor) => {
                         return (
@@ -84,7 +91,6 @@ const AssignedContributors: React.FC<Props> = ({
                                     layout="stack"
                                     details={contributor}
                                 />
-
                                 <ContributorControl>
                                     <SwitchWrapper>
                                         <Switch
@@ -120,7 +126,12 @@ const AssignedContributors: React.FC<Props> = ({
                             </ContributorBase>
                         );
                     })}
-            </Scrollable>
+            </Contributors>
+            <AddButtonWrapper>
+                <Button variant="contained" shape="rounded" color="primary">
+                    Add Contriibutor
+                </Button>
+            </AddButtonWrapper>
         </>
     );
 };
