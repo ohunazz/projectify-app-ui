@@ -20,6 +20,9 @@
     border-style: solid;
     padding: 0 var(--space-12);
 }
+.badge-contained {
+    padding: 0 var(--space-12);
+}
 
 .badge__text {
     font-family: inherit;
@@ -48,7 +51,6 @@
 
 /* Gray Badge */
 .badge-gray.badge-contained {
-    padding: 0 var(--space-12);
     background-color: var(--jaguar-50);
 }
 
