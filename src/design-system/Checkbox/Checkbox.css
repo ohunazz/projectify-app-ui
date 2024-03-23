@@ -1,7 +1,3 @@
-.checkbox {
-    width: max-content;
-}
-
 /*Visually Removes default checkbox  */
 .checkbox__hidden-input {
     appearance: none;
