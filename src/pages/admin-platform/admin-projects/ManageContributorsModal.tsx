@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../../../design-system";
 import { projectService } from "../../../api";
 import { useStore } from "../../../hooks";
@@ -8,6 +8,7 @@ import {
 } from "../../../store";
 import toast from "react-hot-toast";
 import { AssignedContributors } from "./AssignedContributors";
+import { NotAssignedContributors } from "./NotAssignedContributors";
 
 type Props = {
     projectId: string;
@@ -20,6 +21,8 @@ const ManageContributorsModal: React.FC<Props> = ({
     show,
     closeModal
 }) => {
+    const [showNotAssignedContributors, setShowNotAssignedContributors] =
+        useState(false);
     const { state, dispatch } = useStore();
 
     useEffect(() => {
@@ -45,13 +48,27 @@ const ManageContributorsModal: React.FC<Props> = ({
     if (!projectId) return null;
     return (
         <Modal show={show} position="right">
-            <AssignedContributors
-                projectId={projectId}
-                closeModal={closeModal}
-                contributors={
-                    state.projects[projectId].contributors?.assignedContributors
-                }
-            />
+            {showNotAssignedContributors ? (
+                <NotAssignedContributors
+                    notAssignedContributors={
+                        state.projects[projectId].contributors
+                            ?.notAssignedContributors
+                    }
+                    goBack={() => setShowNotAssignedContributors(false)}
+                />
+            ) : (
+                <AssignedContributors
+                    projectId={projectId}
+                    closeModal={closeModal}
+                    contributors={
+                        state.projects[projectId].contributors
+                            ?.assignedContributors
+                    }
+                    showNotAssignedContributors={() =>
+                        setShowNotAssignedContributors(true)
+                    }
+                />
+            )}
         </Modal>
     );
 };

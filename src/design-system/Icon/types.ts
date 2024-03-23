@@ -19,6 +19,7 @@ export type IconName =
     | "minus"
     | "archive"
     | "x"
+    | "arrow-left"
     | "info-in-circle-filled"
     | "check-in-circle-filled"
     | "info-in-circle-sharp-filled"
