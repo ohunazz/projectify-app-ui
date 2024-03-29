@@ -61,7 +61,6 @@ const JoinedAt = styled(Typography)`
 
 const AddButtonWrapper = styled.div`
     height: 7.2rem;
-    padding: 0 var(--space-16);
     display: flex;
     align-items: center;
     justify-content: center;

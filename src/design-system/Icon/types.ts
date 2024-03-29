@@ -20,6 +20,7 @@ export type IconName =
     | "archive"
     | "x"
     | "arrow-left"
+    | "arrow-left"
     | "info-in-circle-filled"
     | "check-in-circle-filled"
     | "info-in-circle-sharp-filled"
