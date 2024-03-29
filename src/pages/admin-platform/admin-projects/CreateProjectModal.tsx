@@ -5,7 +5,8 @@ import {
     Button,
     Typography,
     DatePickerV1,
-    Modal
+    Modal,
+    DatePickerOnChangeDateType
 } from "../../../design-system";
 import { useState } from "react";
 import { projectService } from "../../../api";
@@ -38,10 +39,15 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
     const [description, setDescription] = useState<string>("");
     const [startDate, setStartDate] = useState<Date | null>();
     const [endDate, setEndDate] = useState<Date | null>();
-    const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
-    const [isError, setIsError] = useState<boolean>(false);
-
     const { dispatch } = useStore();
+
+    const onChangeDatePicker = (dates: DatePickerOnChangeDateType) => {
+        if (Array.isArray(dates)) {
+            const [start, end] = dates;
+            setStartDate(start);
+            setEndDate(end);
+        }
+    };
 
     const onChangeName = (value: string) => {
         setName(value);
@@ -50,8 +56,6 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
     const onChangeDescription = (value: string) => {
         setDescription(value);
     };
-
-    const isFormSubmittable = name && description && startDate && endDate;
 
     const clearFields = () => {
         setName("");
@@ -72,24 +76,23 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
             startDate: toIso8601(startDate!),
             endDate: toIso8601(endDate!)
         };
-        try {
-            projectService
-                .create(input)
-                .then((data) => {
-                    const action: AddProjectAction = {
-                        type: Actions.ADMIN_ADD_PROJECT,
-                        payload: data.data
-                    };
-                    dispatch(action);
-                    clearFields();
-                    closeModal();
-                    toast.success("Project has been successfully created"!);
-                })
-                .catch((e) => {
-                    const err = e as Error;
-                    toast.error(err.message);
-                });
-        } catch (error) {}
+
+        projectService
+            .create(input)
+            .then((data) => {
+                const action: AddProjectAction = {
+                    type: Actions.ADMIN_ADD_PROJECT,
+                    payload: data.data
+                };
+                dispatch(action);
+                clearFields();
+                closeModal();
+                toast.success("Project has been successfully created"!);
+            })
+            .catch((e) => {
+                const err = e as Error;
+                toast.error(err.message);
+            });
     };
     return (
         <Modal show={show} position="center">
@@ -143,7 +146,6 @@ const CreateProjectModal: React.FC<CreateProjectModalProps> = ({
                     shape="rounded"
                     color="primary"
                     fullWidth
-                    disabled={isFormSubmitting || !isFormSubmittable}
                     onClick={createProject}
                 >
                     Save

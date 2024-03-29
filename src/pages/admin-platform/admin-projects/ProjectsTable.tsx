@@ -77,9 +77,9 @@ const options: MenuOption[] = [
 ];
 const allowedActions = {
     ACTIVE: [options[5], options[0], options[2], options[3], options[4]],
-    ARCHIVED: [options[0], options[1], options[2], options[4]],
-    ONHOLD: [options[0], options[1], options[2], options[3]],
-    COMPLETED: [options[0], options[1], options[3], options[4]]
+    ARCHIVED: [options[5], options[0], options[1], options[2], options[4]],
+    ONHOLD: [options[5], options[0], options[1], options[2], options[3]],
+    COMPLETED: [options[5], options[0], options[1], options[3], options[4]]
 };
 const columns = ["20%", "10%", "20%", "15%", "15%", "10%", "10%"];
 enum StatusToBadgeColors {
