@@ -110,6 +110,9 @@ const AssignedContributors: React.FC<Props> = ({
                     }
                 };
                 dispatch(action);
+                toast.success(
+                    `Contributer's status has been changed to ${status}`
+                );
             })
             .catch((e) => {
                 const err = e as Error;
